@@ -296,7 +296,7 @@
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">How to Register</h2>
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">কিভাবে রেজিস্ট্রেশন করবেন</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white rounded-xl p-6 shadow-md text-center">
@@ -304,9 +304,9 @@
                             class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <span class="text-2xl font-bold text-primary-600">1</span>
                         </div>
-                        <h3 class="font-semibold text-gray-800 mb-2">Send Money</h3>
-                        <p class="text-gray-600 text-sm">Send your registration fee via bKash, Nagad, Rocket, or Bank
-                            Transfer</p>
+                        <h3 class="font-semibold text-gray-800 mb-2">টাকা পাঠান</h3>
+                        <p class="text-gray-600 text-sm">বিকাশ, নগদ, রকেট বা ব্যাংক ট্রান্সফারের মাধ্যমে আপনার
+                            রেজিস্ট্রেশন ফি পাঠান</p>
                     </div>
 
                     <div class="bg-white rounded-xl p-6 shadow-md text-center">
@@ -314,9 +314,9 @@
                             class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <span class="text-2xl font-bold text-primary-600">2</span>
                         </div>
-                        <h3 class="font-semibold text-gray-800 mb-2">Fill the Form</h3>
-                        <p class="text-gray-600 text-sm">Complete the registration form below with your details and
-                            transaction ID</p>
+                        <h3 class="font-semibold text-gray-800 mb-2">ফর্মটি পূরণ করুন</h3>
+                        <p class="text-gray-600 text-sm">আপনার বিস্তারিত তথ্য এবং ট্রানজেকশন আইডি দিয়ে নিচের
+                            রেজিস্ট্রেশন ফর্মটি পূরণ করুন</p>
                     </div>
 
                     <div class="bg-white rounded-xl p-6 shadow-md text-center">
@@ -324,9 +324,53 @@
                             class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <span class="text-2xl font-bold text-primary-600">3</span>
                         </div>
-                        <h3 class="font-semibold text-gray-800 mb-2">Confirmation</h3>
-                        <p class="text-gray-600 text-sm">We'll verify your payment and confirm your registration</p>
+                        <h3 class="font-semibold text-gray-800 mb-2">কনফার্মেশন</h3>
+                        <p class="text-gray-600 text-sm">আমরা আপনার পেমেন্ট যাচাই করে রেজিস্ট্রেশন কনফার্ম করব</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Phone Numbers Section -->
+    <section class="py-12 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-4">পেমেন্ট নম্বরসমূহ</h2>
+                <p class="text-center text-gray-600 mb-8">নিচের নম্বরে টাকা পাঠাতে ক্লিক করে কপি করুন</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @php
+                        $activePhones = $phoneNumbers->where('active', true);
+                    @endphp
+                    @forelse ($activePhones as $phone)
+                        <div class="bg-white rounded-xl p-5 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer group border-2 border-blue-200 hover:border-blue-400"
+                            onclick="copyPhoneNumber('{{ $phone->number }}', this)">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-sm font-medium text-gray-500">{{ $phone->operator }}</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-primary-500 transition-colors"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="text-xl font-bold text-gray-800 font-mono tracking-wide">{{ $phone->number }}
+                            </div>
+                            <div
+                                class="copy-feedback hidden mt-2 text-sm text-green-600 font-medium flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                কপি হয়েছে!
+                            </div>
+                        </div>
+                    @empty
+                        <div class="col-span-full text-center py-8">
+                            <p class="text-gray-500">পেমেন্ট নম্বর শীঘ্রই যুক্ত করা হবে</p>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -337,8 +381,8 @@
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mx-auto">
                 <div class="bg-white rounded-2xl shadow-xl p-8">
-                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Registration Form</h2>
-                    <p class="text-center text-gray-600 mb-8">Fill in your details to complete your registration</p>
+                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">রেজিস্ট্রেশন ফর্ম</h2>
+                    <p class="text-center text-gray-600 mb-8">রেজিস্ট্রেশন সম্পন্ন করতে আপনার তথ্যগুলো দিন</p>
 
                     <form action="{{ route('donation.submit') }}" method="POST" id="donationForm"
                         enctype="multipart/form-data">
@@ -352,23 +396,23 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
-                                Personal Information
+                                ব্যক্তিগত তথ্য
                             </h3>
 
                             <div class="space-y-4">
                                 <div>
-                                    <label for="name" class="label">Full Name <span
+                                    <label for="name" class="label">পুরো নাম <span
                                             class="text-red-500">*</span></label>
                                     <input type="text" id="name" name="name" value="{{ old('name') }}"
                                         class="input-field @error('name') border-red-500 @enderror"
-                                        placeholder="Enter your full name" required>
+                                        placeholder="আপনার পুরো নাম লিখুন" required>
                                     @error('name')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <div>
-                                    <label for="phone" class="label">Phone Number <span
+                                    <label for="phone" class="label">মোবাইল নম্বর <span
                                             class="text-red-500">*</span></label>
                                     <input type="number" id="phone" name="phone" value="{{ old('phone') }}"
                                         class="input-field @error('phone') border-red-500 @enderror"
@@ -389,7 +433,7 @@
                                         d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
                                     </path>
                                 </svg>
-                                Select Option
+                                অপশন নির্বাচন করুন
                             </h3>
 
                             <!-- Hidden input to store the selected donation type -->
@@ -400,7 +444,7 @@
                                 <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
                                     data-type="iftar" data-amount="250" onclick="selectDonation(this)">
                                     <div class="text-2xl mb-2">🌙</div>
-                                    <div class="font-semibold text-gray-800">Iftar Only</div>
+                                    <div class="font-semibold text-gray-800">শুধুমাত্র ইফতার</div>
                                     <div class="text-primary-600 font-bold">৳250</div>
                                     <div class="check-icon hidden mt-2">
                                         <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
@@ -414,7 +458,7 @@
                                 <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
                                     data-type="jersey" data-amount="250" onclick="selectDonation(this)">
                                     <div class="text-2xl mb-2">👕</div>
-                                    <div class="font-semibold text-gray-800">Jersey Only</div>
+                                    <div class="font-semibold text-gray-800">শুধুমাত্র জার্সি</div>
                                     <div class="text-primary-600 font-bold">৳250</div>
                                     <div class="check-icon hidden mt-2">
                                         <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
@@ -428,7 +472,7 @@
                                 <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
                                     data-type="both" data-amount="500" onclick="selectDonation(this)">
                                     <div class="text-2xl mb-2">⭐</div>
-                                    <div class="font-semibold text-gray-800">Both</div>
+                                    <div class="font-semibold text-gray-800">ইফতার + জার্সি</div>
                                     <div class="text-gold-600 font-bold">৳500</div>
                                     <div class="check-icon hidden mt-2">
                                         <svg class="w-6 h-6 mx-auto text-gold-600" fill="none"
@@ -446,7 +490,7 @@
 
                             <!-- Amount Display -->
                             <div class="bg-gray-100 rounded-lg p-4 text-center">
-                                <span class="text-gray-600">Total Amount: </span>
+                                <span class="text-gray-600">মোট পরিমাণ: </span>
                                 <span id="totalAmount" class="text-2xl font-bold text-primary-600">৳0</span>
                             </div>
                         </div>
@@ -460,16 +504,16 @@
                                         d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
                                     </path>
                                 </svg>
-                                Jersey Details
+                                জার্সির বিবরণ
                             </h3>
 
                             <div class="space-y-4">
                                 <div>
-                                    <label for="jersey_size_id" class="label">Jersey Size <span
+                                    <label for="jersey_size_id" class="label">জার্সির সাইজ <span
                                             class="text-red-500">*</span></label>
                                     <select id="jersey_size_id" name="jersey_size_id"
                                         class="input-field @error('jersey_size_id') border-red-500 @enderror">
-                                        <option value="">Select Size</option>
+                                        <option value="">সাইজ নির্বাচন করুন</option>
                                         @foreach ($jerseySizes as $size)
                                             <option value="{{ $size->id }}"
                                                 {{ old('jersey_size_id') == $size->id ? 'selected' : '' }}>
@@ -483,24 +527,24 @@
                                 </div>
 
                                 <div>
-                                    <label for="name_on_jersey" class="label">Name on Jersey <span
+                                    <label for="name_on_jersey" class="label">জার্সিতে নাম <span
                                             class="text-red-500">*</span></label>
                                     <input type="text" id="name_on_jersey" name="name_on_jersey"
                                         value="{{ old('name_on_jersey') }}"
                                         class="input-field @error('name_on_jersey') border-red-500 @enderror"
-                                        placeholder="Max 15 characters" maxlength="15">
+                                        placeholder="সর্বোচ্চ ১৫ অক্ষর" maxlength="15">
                                     @error('name_on_jersey')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <div>
-                                    <label for="number_on_jersey" class="label">Number on Jersey <span
+                                    <label for="number_on_jersey" class="label">জার্সিতে নম্বর <span
                                             class="text-red-500">*</span></label>
                                     <input type="text" id="number_on_jersey" name="number_on_jersey"
                                         value="{{ old('number_on_jersey') }}"
                                         class="input-field @error('number_on_jersey') border-red-500 @enderror"
-                                        placeholder="e.g., 10" maxlength="5">
+                                        placeholder="যেমন, ১০" maxlength="5">
                                     @error('number_on_jersey')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -517,29 +561,29 @@
                                         d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z">
                                     </path>
                                 </svg>
-                                Payment Information
+                                পেমেন্টের তথ্য
                             </h3>
 
                             <div class="space-y-4">
                                 <div>
-                                    <label for="sent_from" class="label">Sent From Number <span
+                                    <label for="sent_from" class="label">যে নম্বর থেকে পাঠিয়েছেন <span
                                             class="text-red-500">*</span></label>
                                     <input type="number" id="sent_from" name="sent_from"
                                         value="{{ old('sent_from') }}"
                                         class="input-field @error('sent_from') border-red-500 @enderror"
-                                        placeholder="Your mobile number from which you sent money" required>
+                                        placeholder="যে নম্বর থেকে টাকা পাঠিয়েছেন" required>
                                     @error('sent_from')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <div>
-                                    <label for="sent_to_phone_id" class="label">Sent To Number <span
+                                    <label for="sent_to_phone_id" class="label">যে নম্বরে পাঠিয়েছেন <span
                                             class="text-red-500">*</span></label>
                                     <select id="sent_to_phone_id" name="sent_to_phone_id"
                                         class="input-field @error('sent_to_phone_id') border-red-500 @enderror"
                                         required>
-                                        <option value="">Select receiving number</option>
+                                        <option value="">যে নম্বরে টাকা পাঠিয়েছেন তা নির্বাচন করুন</option>
                                         @foreach ($phoneNumbers as $phone)
                                             <option value="{{ $phone->id }}"
                                                 {{ old('sent_to_phone_id') == $phone->id ? 'selected' : '' }}>
@@ -553,11 +597,11 @@
                                 </div>
 
                                 <div>
-                                    <label for="transaction_id" class="label">Transaction ID / Reference</label>
+                                    <label for="transaction_id" class="label">ট্রানজেকশন আইডি / রেফারেন্স</label>
                                     <input type="text" id="transaction_id" name="transaction_id"
                                         value="{{ old('transaction_id') }}"
                                         class="input-field @error('transaction_id') border-red-500 @enderror"
-                                        placeholder="Enter bKash/Nagad transaction ID">
+                                        placeholder="বিকাশ/নগদ ট্রানজেকশন আইডি দিন">
                                     @error('transaction_id')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -566,13 +610,13 @@
                                 <!-- OR Divider -->
                                 <div class="flex items-center gap-4 my-2">
                                     <div class="flex-1 h-px bg-gray-200"></div>
-                                    <span class="text-sm font-medium text-gray-400 uppercase">or</span>
+                                    <span class="text-sm font-medium text-gray-400 uppercase">অথবা</span>
                                     <div class="flex-1 h-px bg-gray-200"></div>
                                 </div>
 
                                 <!-- Screenshot Upload -->
                                 <div>
-                                    <label for="screenshot" class="label">Payment Screenshot</label>
+                                    <label for="screenshot" class="label">পেমেন্টের স্ক্রিনশট</label>
                                     <div class="relative">
                                         <label for="screenshot"
                                             class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-primary-400 hover:bg-primary-50/50 transition-colors duration-200 @error('screenshot') border-red-500 @enderror"
@@ -586,8 +630,10 @@
                                                         d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
                                                     </path>
                                                 </svg>
-                                                <span class="text-sm text-gray-500">Click to upload screenshot</span>
-                                                <span class="text-xs text-gray-400 mt-1">PNG, JPG up to 5MB</span>
+                                                <span class="text-sm text-gray-500">স্ক্রিনশট আপলোড করতে ক্লিক
+                                                    করুন</span>
+                                                <span class="text-xs text-gray-400 mt-1">সর্বোচ্চ ৫ মেগাবাইট (PNG,
+                                                    JPG)</span>
                                             </div>
                                             <div id="screenshotPreview" class="hidden flex items-center gap-3">
                                                 <img id="screenshotThumb" src="" alt="Preview"
@@ -597,15 +643,15 @@
                                                     </p>
                                                     <p id="screenshotSize" class="text-xs text-gray-400"></p>
                                                     <button type="button" onclick="clearScreenshot(event)"
-                                                        class="text-xs text-red-500 hover:text-red-700 font-medium mt-1 cursor-pointer">Remove</button>
+                                                        class="text-xs text-red-500 hover:text-red-700 font-medium mt-1 cursor-pointer">মুছুন</button>
                                                 </div>
                                             </div>
                                         </label>
                                         <input type="file" id="screenshot" name="screenshot" accept="image/*"
                                             class="hidden" onchange="previewScreenshot(this)">
                                     </div>
-                                    <p class="text-xs text-gray-500 mt-1">Provide either a Transaction ID or a
-                                        screenshot as payment proof.</p>
+                                    <p class="text-xs text-gray-500 mt-1">পেমেন্টের প্রমাণ হিসেবে ট্রানজেকশন আইডি অথবা
+                                        স্ক্রিনশট প্রদান করুন।</p>
                                     @error('screenshot')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -615,11 +661,11 @@
 
                         <!-- Submit Button -->
                         <button type="submit" class="btn-primary w-full text-lg">
-                            Submit Registration
+                            রেজিস্ট্রেশন সাবমিট করুন
                         </button>
 
                         <p class="text-center text-sm text-gray-500 mt-4">
-                            By submitting, you agree to our terms and conditions.
+                            সাবমিট করার মাধ্যমে আপনি আমাদের শর্তাবলীতে সম্মত হচ্ছেন।
                         </p>
                     </form>
                 </div>
@@ -642,7 +688,11 @@
                     </a>
                 </div>
                 <p class="text-gray-500 text-sm">
-                    &copy; {{ date('Y') }} SSC-2013 Batch. All rights reserved.
+                    &copy; {{ date('Y') }} SSC-2013 Batch. সর্বস্বত্ব সংরক্ষিত।
+                </p>
+                <p class="text-gray-600 text-sm mt-2">
+                    Developed with ❤️ by <a href="https://www.facebook.com/ImMaheKarim" target="_blank"
+                        class="text-gold-400 font-medium hover:underline">Mahi Karim</a>
                 </p>
             </div>
         </div>
@@ -650,6 +700,41 @@
 
     <!-- Scripts -->
     <script>
+        // ── Copy Phone Number ──
+        function copyPhoneNumber(number, element) {
+            navigator.clipboard.writeText(number).then(() => {
+                // Show success feedback
+                const feedback = element.querySelector('.copy-feedback');
+                feedback.classList.remove('hidden');
+
+                // Add success styling
+                element.classList.add('border-green-400', 'bg-green-50');
+
+                // Hide feedback after 2 seconds
+                setTimeout(() => {
+                    feedback.classList.add('hidden');
+                    element.classList.remove('border-green-400', 'bg-green-50');
+                }, 2000);
+            }).catch(err => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = number;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const feedback = element.querySelector('.copy-feedback');
+                feedback.classList.remove('hidden');
+                element.classList.add('border-green-400', 'bg-green-50');
+
+                setTimeout(() => {
+                    feedback.classList.add('hidden');
+                    element.classList.remove('border-green-400', 'bg-green-50');
+                }, 2000);
+            });
+        }
+
         // ── Screenshot Preview ──
         function previewScreenshot(input) {
             const file = input.files[0];
@@ -659,7 +744,7 @@
                     document.getElementById('screenshotThumb').src = e.target.result;
                     document.getElementById('screenshotName').textContent = file.name;
                     document.getElementById('screenshotSize').textContent = (file.size / 1024 / 1024).toFixed(2) +
-                    ' MB';
+                        ' MB';
                     document.getElementById('screenshotPlaceholder').classList.add('hidden');
                     document.getElementById('screenshotPreview').classList.remove('hidden');
                 };
@@ -747,7 +832,7 @@
         document.getElementById('donationForm').addEventListener('submit', function(e) {
             if (!donationTypeInput.value) {
                 e.preventDefault();
-                alert('Please select a donation type.');
+                alert('দয়া করে একটি অপশন নির্বাচন করুন।');
                 return false;
             }
         });

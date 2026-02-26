@@ -19,8 +19,9 @@ class PhoneNumberController extends Controller
         $validated = $request->validate([
             'number' => ['required', 'string', 'max:20'],
             'operator' => ['required', 'string', 'max:50'],
-            'active' => ['boolean'],
         ]);
+
+        $validated['active'] = $request->has('active');
 
         PhoneNumber::create($validated);
 
@@ -32,8 +33,9 @@ class PhoneNumberController extends Controller
         $validated = $request->validate([
             'number' => ['required', 'string', 'max:20'],
             'operator' => ['required', 'string', 'max:50'],
-            'active' => ['boolean'],
         ]);
+
+        $validated['active'] = $request->has('active');
 
         $phoneNumber->update($validated);
 
