@@ -47,7 +47,7 @@ class DonationController extends Controller
 
         // Send SMS notification
         $smsService = new SmsService();
-        $message = "SSC 2013 Batch এর রামাদান রিইউনিয়ন প্রোগ্রাম & NPL Season 9 , 2026 এ রেজিস্ট্রেশন করার জন্য ধন্যবাদ । আপনার পেমেন্ট এবং রেজিস্ট্রেশন সফল হয়েছে । Developed By - Mahi Karim";
+        $message = "SSC 2013 Batch এর রামাদান রিইউনিয়ন প্রোগ্রাম এবং NPL Season 9 (2026) এ রেজিস্ট্রেশন করার জন্য ধন্যবাদ। আপনার পেমেন্ট এবং রেজিস্ট্রেশন সফল হয়েছে। Developed By - Mahi Karim";
         $result = $smsService->send($donation->phone, $message);
 
         $donation->update([
