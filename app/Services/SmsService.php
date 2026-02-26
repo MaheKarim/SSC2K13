@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class SmsService
 {
-    protected string $baseUrl = 'https://api.mimsms.com/api/SmsSending/DSMS';
+    protected string $baseUrl = 'https://api.mimsms.com/api/SmsSending/SMS';
     protected string $username;
     protected string $apiKey;
     protected string $senderName;
@@ -29,7 +29,7 @@ class SmsService
                 'UserName' => $this->username,
                 'Apikey' => $this->apiKey,
                 'SenderName' => $this->senderName,
-                'TransactionType' => 'D',
+                'TransactionType' => 'T',
                 'SmsData' => [
                     [
                         'MobNumber' => $mobileNumber,

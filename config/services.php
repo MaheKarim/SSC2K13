@@ -32,7 +32,7 @@ return [
     ],
 
     'mimsms' => [
-        'username' => env('MIMSMS_USERNAME', '8809617632605'),
+        'username' => env('MIMSMS_USERNAME', 'mahekarim@gmail.com'),
         'api_key' => env('MIMSMS_API_KEY', 'XE7YODNN322DK91'),
         'sender_name' => env('MIMSMS_SENDER_NAME', '8809617632605'),
     ],
