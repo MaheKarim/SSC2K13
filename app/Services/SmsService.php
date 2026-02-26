@@ -28,14 +28,11 @@ class SmsService
             $response = Http::timeout(30)->post($this->baseUrl, [
                 'UserName' => $this->username,
                 'Apikey' => $this->apiKey,
+                'MobileNumber' => $mobileNumber,
+                'CampaignId' => 'null',
                 'SenderName' => $this->senderName,
                 'TransactionType' => 'T',
-                'SmsData' => [
-                    [
-                        'MobNumber' => $mobileNumber,
-                        'Message' => $message,
-                    ]
-                ],
+                'Message' => $message,
             ]);
 
             $result = $response->json();
