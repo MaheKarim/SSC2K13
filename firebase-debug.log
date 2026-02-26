@@ -1,0 +1,186 @@
+[debug] [2026-02-26T13:59:43.241Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.242Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.242Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.242Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.243Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.243Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.243Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.243Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.243Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.243Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.243Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ [none]
+[debug] [2026-02-26T13:59:43.243Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T13:59:43.258Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com [none]
+[debug] [2026-02-26T13:59:43.258Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T13:59:43.258Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com [none]
+[debug] [2026-02-26T13:59:43.258Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T13:59:43.259Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com [none]
+[debug] [2026-02-26T13:59:43.259Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T13:59:43.259Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com [none]
+[debug] [2026-02-26T13:59:43.259Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T13:59:43.268Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.268Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.269Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.269Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.269Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.269Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.269Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.269Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.269Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.269Z] Checked if tokens are valid: true, expires at: 1772117457706
+[debug] [2026-02-26T13:59:43.269Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ [none]
+[debug] [2026-02-26T13:59:43.269Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T13:59:43.269Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com [none]
+[debug] [2026-02-26T13:59:43.269Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T13:59:43.270Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com [none]
+[debug] [2026-02-26T13:59:43.270Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T13:59:43.270Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com [none]
+[debug] [2026-02-26T13:59:43.270Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T13:59:43.271Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com [none]
+[debug] [2026-02-26T13:59:43.271Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T13:59:44.869Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com 403
+[debug] [2026-02-26T13:59:44.869Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com [omitted]
+[debug] [2026-02-26T13:59:44.929Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com 200
+[debug] [2026-02-26T13:59:44.929Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com [omitted]
+[debug] [2026-02-26T13:59:44.932Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com 200
+[debug] [2026-02-26T13:59:44.933Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com [omitted]
+[debug] [2026-02-26T13:59:44.933Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com 403
+[debug] [2026-02-26T13:59:44.933Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com [omitted]
+[debug] [2026-02-26T13:59:44.934Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com 200
+[debug] [2026-02-26T13:59:44.934Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com [omitted]
+[debug] [2026-02-26T13:59:44.935Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com 200
+[debug] [2026-02-26T13:59:44.935Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com [omitted]
+[debug] [2026-02-26T13:59:44.936Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com 200
+[debug] [2026-02-26T13:59:44.936Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com [omitted]
+[debug] [2026-02-26T13:59:44.966Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com 200
+[debug] [2026-02-26T13:59:44.966Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com [omitted]
+[debug] [2026-02-26T13:59:45.164Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ 200
+[debug] [2026-02-26T13:59:45.164Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ [omitted]
+[debug] [2026-02-26T13:59:45.167Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-26T13:59:45.167Z] > authorizing via signed-in user (mahekarim@gmail.com)
+[debug] [2026-02-26T13:59:45.223Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ 200
+[debug] [2026-02-26T13:59:45.224Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ [omitted]
+[debug] [2026-02-26T16:17:22.046Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.047Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.048Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.048Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.048Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.048Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.048Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.048Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.048Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.048Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.049Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ [none]
+[debug] [2026-02-26T16:17:22.049Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T16:17:22.064Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com [none]
+[debug] [2026-02-26T16:17:22.064Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T16:17:22.064Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com [none]
+[debug] [2026-02-26T16:17:22.064Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T16:17:22.065Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com [none]
+[debug] [2026-02-26T16:17:22.065Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T16:17:22.065Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com [none]
+[debug] [2026-02-26T16:17:22.065Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T16:17:22.074Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.074Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.074Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.074Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.074Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.074Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.074Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.074Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.074Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.074Z] Checked if tokens are valid: true, expires at: 1772126222797
+[debug] [2026-02-26T16:17:22.074Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ [none]
+[debug] [2026-02-26T16:17:22.074Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T16:17:22.075Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com [none]
+[debug] [2026-02-26T16:17:22.075Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T16:17:22.075Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com [none]
+[debug] [2026-02-26T16:17:22.075Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T16:17:22.078Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com [none]
+[debug] [2026-02-26T16:17:22.078Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T16:17:22.080Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com [none]
+[debug] [2026-02-26T16:17:22.080Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T16:17:23.762Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com 403
+[debug] [2026-02-26T16:17:23.762Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com [omitted]
+[debug] [2026-02-26T16:17:23.770Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com 403
+[debug] [2026-02-26T16:17:23.770Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com [omitted]
+[debug] [2026-02-26T16:17:23.791Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com 200
+[debug] [2026-02-26T16:17:23.792Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com [omitted]
+[debug] [2026-02-26T16:17:23.796Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com 200
+[debug] [2026-02-26T16:17:23.796Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com [omitted]
+[debug] [2026-02-26T16:17:23.804Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com 200
+[debug] [2026-02-26T16:17:23.804Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com [omitted]
+[debug] [2026-02-26T16:17:23.826Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com 200
+[debug] [2026-02-26T16:17:23.826Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com [omitted]
+[debug] [2026-02-26T16:17:23.829Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com 200
+[debug] [2026-02-26T16:17:23.829Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com [omitted]
+[debug] [2026-02-26T16:17:23.863Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com 200
+[debug] [2026-02-26T16:17:23.863Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com [omitted]
+[debug] [2026-02-26T16:17:24.187Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ 200
+[debug] [2026-02-26T16:17:24.187Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ [omitted]
+[debug] [2026-02-26T16:17:24.192Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ 200
+[debug] [2026-02-26T16:17:24.192Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ [omitted]
+[debug] [2026-02-26T16:17:24.192Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-26T16:17:24.193Z] > authorizing via signed-in user (mahekarim@gmail.com)
+[debug] [2026-02-26T18:31:15.136Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.137Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.138Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.138Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.138Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.138Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.138Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.138Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.138Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.139Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.139Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ [none]
+[debug] [2026-02-26T18:31:15.139Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T18:31:15.153Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com [none]
+[debug] [2026-02-26T18:31:15.154Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T18:31:15.154Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com [none]
+[debug] [2026-02-26T18:31:15.154Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T18:31:15.154Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com [none]
+[debug] [2026-02-26T18:31:15.154Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T18:31:15.155Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com [none]
+[debug] [2026-02-26T18:31:15.155Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T18:31:15.164Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.164Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.164Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.164Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.164Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.164Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.164Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.164Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.164Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.164Z] Checked if tokens are valid: true, expires at: 1772132996275
+[debug] [2026-02-26T18:31:15.164Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ [none]
+[debug] [2026-02-26T18:31:15.164Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T18:31:15.165Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com [none]
+[debug] [2026-02-26T18:31:15.165Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T18:31:15.165Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com [none]
+[debug] [2026-02-26T18:31:15.165Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T18:31:15.165Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com [none]
+[debug] [2026-02-26T18:31:15.165Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T18:31:15.166Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com [none]
+[debug] [2026-02-26T18:31:15.166Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com x-goog-quota-user=projects/finlisty-app-bd
+[debug] [2026-02-26T18:31:17.681Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com 200
+[debug] [2026-02-26T18:31:17.681Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com [omitted]
+[debug] [2026-02-26T18:31:17.681Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com 200
+[debug] [2026-02-26T18:31:17.681Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com [omitted]
+[debug] [2026-02-26T18:31:17.681Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com 403
+[debug] [2026-02-26T18:31:17.681Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com [omitted]
+[debug] [2026-02-26T18:31:17.682Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com 200
+[debug] [2026-02-26T18:31:17.682Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseapphosting.googleapis.com [omitted]
+[debug] [2026-02-26T18:31:17.683Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com 403
+[debug] [2026-02-26T18:31:17.683Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebaseio.com [omitted]
+[debug] [2026-02-26T18:31:17.683Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com 200
+[debug] [2026-02-26T18:31:17.683Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com [omitted]
+[debug] [2026-02-26T18:31:17.683Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com 200
+[debug] [2026-02-26T18:31:17.683Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasedataconnect.googleapis.com [omitted]
+[debug] [2026-02-26T18:31:17.715Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com 200
+[debug] [2026-02-26T18:31:17.715Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/firebasecrashlytics.googleapis.com [omitted]
+[debug] [2026-02-26T18:31:18.168Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-26T18:31:18.169Z] > authorizing via signed-in user (mahekarim@gmail.com)
+[debug] [2026-02-26T18:31:18.266Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ 200
+[debug] [2026-02-26T18:31:18.266Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ [omitted]
+[debug] [2026-02-26T18:31:18.267Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ 200
+[debug] [2026-02-26T18:31:18.267Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/finlisty-app-bd/services/ [omitted]

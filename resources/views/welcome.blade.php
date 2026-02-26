@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSC-2013 Batch - Iftar & Jersey Registration</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="font-sans antialiased">
+    <!-- Hero Section -->
+    <section class="hero-section text-white relative overflow-hidden min-h-[90vh] flex items-center">
+        <!-- Animated Background Orbs -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-orb hero-orb-3"></div>
+            <div class="hero-orb hero-orb-4"></div>
+
+            <!-- Twinkling Stars (small dots) -->
+            <div class="hero-star" style="top: 15%; left: 20%; animation-delay: 0s;"></div>
+            <div class="hero-star" style="top: 35%; left: 70%; animation-delay: 1.2s;"></div>
+            <div class="hero-star" style="top: 60%; left: 40%; animation-delay: 2.4s;"></div>
+            <div class="hero-star" style="top: 80%; left: 85%; animation-delay: 0.6s;"></div>
+            <div class="hero-star" style="top: 25%; left: 90%; animation-delay: 1.8s;"></div>
+            <div class="hero-star" style="top: 70%; left: 15%; animation-delay: 3s;"></div>
+            <div class="hero-star" style="top: 10%; left: 55%; animation-delay: 0.3s;"></div>
+            <div class="hero-star" style="top: 45%; left: 10%; animation-delay: 2s;"></div>
+            <div class="hero-star" style="top: 55%; left: 82%; animation-delay: 1.5s;"></div>
+
+            <!-- Floating Crescent Moons (SVG) -->
+            <svg class="islamic-crescent islamic-crescent-1" viewBox="0 0 64 64" fill="none">
+                <path
+                    d="M40 8C28.954 8 20 16.954 20 28s8.954 20 20 20c4.374 0 8.438-1.405 11.74-3.787C47.622 49.003 41.04 52 33.778 52 20.58 52 10 41.42 10 28.222S20.58 4.444 33.778 4.444c7.262 0 13.844 2.997 17.962 7.769A19.89 19.89 0 0040 8z"
+                    fill="currentColor" />
+            </svg>
+            <svg class="islamic-crescent islamic-crescent-2" viewBox="0 0 64 64" fill="none">
+                <path
+                    d="M40 8C28.954 8 20 16.954 20 28s8.954 20 20 20c4.374 0 8.438-1.405 11.74-3.787C47.622 49.003 41.04 52 33.778 52 20.58 52 10 41.42 10 28.222S20.58 4.444 33.778 4.444c7.262 0 13.844 2.997 17.962 7.769A19.89 19.89 0 0040 8z"
+                    fill="currentColor" />
+            </svg>
+            <svg class="islamic-crescent islamic-crescent-3" viewBox="0 0 64 64" fill="none">
+                <path
+                    d="M40 8C28.954 8 20 16.954 20 28s8.954 20 20 20c4.374 0 8.438-1.405 11.74-3.787C47.622 49.003 41.04 52 33.778 52 20.58 52 10 41.42 10 28.222S20.58 4.444 33.778 4.444c7.262 0 13.844 2.997 17.962 7.769A19.89 19.89 0 0040 8z"
+                    fill="currentColor" />
+            </svg>
+
+            <!-- Floating Islamic Stars (5-pointed) -->
+            <svg class="islamic-star islamic-star-1" viewBox="0 0 40 40" fill="none">
+                <path d="M20 2l4.9 10.5L36 14.3l-8 7.5 2 11.2L20 27.5 9.9 33l2-11.2-8-7.5 11.1-1.8z"
+                    fill="currentColor" />
+            </svg>
+            <svg class="islamic-star islamic-star-2" viewBox="0 0 40 40" fill="none">
+                <path d="M20 2l4.9 10.5L36 14.3l-8 7.5 2 11.2L20 27.5 9.9 33l2-11.2-8-7.5 11.1-1.8z"
+                    fill="currentColor" />
+            </svg>
+            <svg class="islamic-star islamic-star-3" viewBox="0 0 40 40" fill="none">
+                <path d="M20 2l4.9 10.5L36 14.3l-8 7.5 2 11.2L20 27.5 9.9 33l2-11.2-8-7.5 11.1-1.8z"
+                    fill="currentColor" />
+            </svg>
+            <svg class="islamic-star islamic-star-4" viewBox="0 0 40 40" fill="none">
+                <path d="M20 2l4.9 10.5L36 14.3l-8 7.5 2 11.2L20 27.5 9.9 33l2-11.2-8-7.5 11.1-1.8z"
+                    fill="currentColor" />
+            </svg>
+
+            <!-- Mosque Dome Silhouette (bottom-right) -->
+            <svg class="islamic-mosque" viewBox="0 0 200 120" fill="none">
+                <path d="M100 10 C100 10, 60 50, 60 80 L60 120 L140 120 L140 80 C140 50, 100 10, 100 10Z"
+                    fill="currentColor" opacity="0.5" />
+                <rect x="95" y="0" width="10" height="20" rx="5" fill="currentColor" opacity="0.6" />
+                <path d="M97 0 L100 -8 L103 0" fill="currentColor" opacity="0.6" />
+                <!-- Minaret left -->
+                <rect x="45" y="50" width="8" height="70" fill="currentColor" opacity="0.4" />
+                <path d="M44 50 L49 35 L54 50" fill="currentColor" opacity="0.4" />
+                <!-- Minaret right -->
+                <rect x="147" y="50" width="8" height="70" fill="currentColor" opacity="0.4" />
+                <path d="M146 50 L151 35 L156 50" fill="currentColor" opacity="0.4" />
+            </svg>
+
+            <!-- Lantern decorations -->
+            <svg class="islamic-lantern islamic-lantern-1" viewBox="0 0 32 48" fill="none">
+                <rect x="13" y="0" width="6" height="6" rx="1" fill="currentColor" opacity="0.7" />
+                <path d="M10 6 L22 6 L20 14 Q16 18 12 14 Z" fill="currentColor" opacity="0.6" />
+                <rect x="10" y="14" width="12" height="20" rx="2" fill="currentColor" opacity="0.4" />
+                <rect x="12" y="16" width="8" height="6" rx="1" fill="currentColor"
+                    opacity="0.15" />
+                <rect x="12" y="24" width="8" height="6" rx="1" fill="currentColor"
+                    opacity="0.15" />
+                <path d="M10 34 L22 34 L20 40 Q16 44 12 40 Z" fill="currentColor" opacity="0.5" />
+            </svg>
+            <svg class="islamic-lantern islamic-lantern-2" viewBox="0 0 32 48" fill="none">
+                <rect x="13" y="0" width="6" height="6" rx="1" fill="currentColor"
+                    opacity="0.7" />
+                <path d="M10 6 L22 6 L20 14 Q16 18 12 14 Z" fill="currentColor" opacity="0.6" />
+                <rect x="10" y="14" width="12" height="20" rx="2" fill="currentColor"
+                    opacity="0.4" />
+                <rect x="12" y="16" width="8" height="6" rx="1" fill="currentColor"
+                    opacity="0.15" />
+                <rect x="12" y="24" width="8" height="6" rx="1" fill="currentColor"
+                    opacity="0.15" />
+                <path d="M10 34 L22 34 L20 40 Q16 44 12 40 Z" fill="currentColor" opacity="0.5" />
+            </svg>
+        </div>
+
+        <div class="container mx-auto px-4 py-16 md:py-24 relative z-10">
+            <div class="text-center max-w-5xl mx-auto">
+                <!-- Badge with glow -->
+                <div class="hero-animate inline-flex items-center glass-badge px-5 py-2.5 rounded-full text-sm mb-8 cursor-default"
+                    style="animation-delay: 0.1s;">
+                    <svg class="w-4 h-4 mr-2 text-gold-400" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                        </path>
+                    </svg>
+                    <span class="font-medium">Government Islampur Nekjahan Pilot Model High School</span>
+                </div>
+
+                <!-- Main Title with gradient text -->
+                <h1 class="hero-animate text-5xl md:text-7xl lg:text-8xl font-extrabold mb-4 leading-tight"
+                    style="animation-delay: 0.25s;">
+                    <span class="hero-title-gradient">SSC-2013</span>
+                    <span class="block text-white/90 text-3xl md:text-5xl lg:text-6xl font-bold mt-2">Batch
+                        Reunion</span>
+                </h1>
+
+                <p class="hero-animate text-xl md:text-2xl text-white/70 mb-6 font-light tracking-wide"
+                    style="animation-delay: 0.4s;">
+                    Iftar Mahfil & Jersey Registration 2025
+                </p>
+
+                <p class="hero-animate text-base md:text-lg text-white/50 max-w-2xl mx-auto mb-12"
+                    style="animation-delay: 0.5s;">
+                    Join us in making this Ramadan special! Contribute to our batch Iftar Mahfil and get your custom
+                    jersey.
+                </p>
+
+                <!-- Info Cards Row: Countdown + Participants -->
+                <div class="hero-animate grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-12"
+                    style="animation-delay: 0.6s;">
+                    <!-- Iftar Countdown Card -->
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="flex items-center justify-center gap-2 mb-4">
+                            <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <h3 class="text-sm font-semibold text-white/80 uppercase tracking-wider">Iftar Date</h3>
+                        </div>
+                        @if ($iftarDate)
+                            <p class="text-gold-400 font-bold text-lg mb-4">
+                                {{ \Carbon\Carbon::parse($iftarDate)->format('d F, Y') }}</p>
+                            <div id="countdown" class="grid grid-cols-4 gap-3">
+                                <div class="countdown-unit">
+                                    <span id="countdown-days"
+                                        class="text-2xl md:text-3xl font-bold text-white">--</span>
+                                    <span class="text-[10px] uppercase tracking-widest text-white/50 mt-1">Days</span>
+                                </div>
+                                <div class="countdown-unit">
+                                    <span id="countdown-hours"
+                                        class="text-2xl md:text-3xl font-bold text-white">--</span>
+                                    <span class="text-[10px] uppercase tracking-widest text-white/50 mt-1">Hours</span>
+                                </div>
+                                <div class="countdown-unit">
+                                    <span id="countdown-minutes"
+                                        class="text-2xl md:text-3xl font-bold text-white">--</span>
+                                    <span class="text-[10px] uppercase tracking-widest text-white/50 mt-1">Mins</span>
+                                </div>
+                                <div class="countdown-unit">
+                                    <span id="countdown-seconds"
+                                        class="text-2xl md:text-3xl font-bold text-white">--</span>
+                                    <span class="text-[10px] uppercase tracking-widest text-white/50 mt-1">Secs</span>
+                                </div>
+                            </div>
+                        @else
+                            <p class="text-white/40 text-lg italic">Date to be announced</p>
+                        @endif
+                    </div>
+
+                    <!-- Verified Participants Card -->
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="flex items-center justify-center gap-2 mb-4">
+                            <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                </path>
+                            </svg>
+                            <h3 class="text-sm font-semibold text-white/80 uppercase tracking-wider">Verified
+                                Participants</h3>
+                        </div>
+                        <div class="flex items-center justify-center gap-3">
+                            <span id="participant-count"
+                                class="text-5xl md:text-6xl font-extrabold hero-title-gradient"
+                                data-target="{{ $verifiedParticipants }}">0</span>
+                            <span class="text-white/50 text-sm">people<br>joined</span>
+                        </div>
+                        @if ($verifiedParticipants > 0)
+                            <div class="flex items-center justify-center gap-1.5 mt-4">
+                                <span class="participant-pulse"></span>
+                                <span class="text-xs text-green-400 font-medium">Verified & Confirmed</span>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+                <!-- Donation Cards -->
+                <div class="hero-animate grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12"
+                    style="animation-delay: 0.75s;">
+                    <!-- Iftar Card -->
+                    <div
+                        class="glass-card rounded-2xl p-6 hover:border-gold-400/40 transition-all duration-300 cursor-default group">
+                        <div
+                            class="w-12 h-12 bg-gold-400/15 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-gold-400/25 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-white/90">Iftar Mahfil</h3>
+                        <p class="text-3xl font-extrabold hero-title-gradient mb-2">৳250</p>
+                        <p class="text-sm text-white/40">Join our batch Iftar gathering</p>
+                    </div>
+
+                    <!-- Jersey Card -->
+                    <div
+                        class="glass-card rounded-2xl p-6 hover:border-gold-400/40 transition-all duration-300 cursor-default group">
+                        <div
+                            class="w-12 h-12 bg-gold-400/15 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-gold-400/25 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-white/90">Batch Jersey</h3>
+                        <p class="text-3xl font-extrabold hero-title-gradient mb-2">৳250</p>
+                        <p class="text-sm text-white/40">Custom batch jersey with your name</p>
+                    </div>
+
+                    <!-- Both Card (highlighted) -->
+                    <div class="glass-card-highlight rounded-2xl p-6 transition-all duration-300 cursor-default group">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                            <span
+                                class="bg-gold-500 text-xs font-bold text-white px-3 py-1 rounded-full uppercase tracking-wider">Best
+                                Value</span>
+                        </div>
+                        <div
+                            class="w-12 h-12 bg-gold-400/25 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-gold-400/35 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-white">Complete Package</h3>
+                        <p class="text-3xl font-extrabold hero-title-gradient mb-2">৳500</p>
+                        <p class="text-sm text-white/50">Iftar + Jersey combined</p>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hero-animate" style="animation-delay: 0.9s;">
+                    <a href="#donate"
+                        class="hero-cta-btn inline-flex items-center font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 cursor-pointer">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Register Now
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wave Divider -->
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+                    fill="#f9fafb" />
+            </svg>
+        </div>
+    </section>
+
+    <!-- Payment Instructions -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">How to Register</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl p-6 shadow-md text-center">
+                        <div
+                            class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-primary-600">1</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Send Money</h3>
+                        <p class="text-gray-600 text-sm">Send your registration fee via bKash, Nagad, Rocket, or Bank
+                            Transfer</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-md text-center">
+                        <div
+                            class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-primary-600">2</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Fill the Form</h3>
+                        <p class="text-gray-600 text-sm">Complete the registration form below with your details and
+                            transaction ID</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-md text-center">
+                        <div
+                            class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-primary-600">3</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Confirmation</h3>
+                        <p class="text-gray-600 text-sm">We'll verify your payment and confirm your registration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Form Section -->
+    <section id="donate" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Registration Form</h2>
+                    <p class="text-center text-gray-600 mb-8">Fill in your details to complete your registration</p>
+
+                    <form action="{{ route('donation.submit') }}" method="POST" id="donationForm"
+                        enctype="multipart/form-data">
+                        @csrf
+
+                        <!-- Personal Information -->
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                Personal Information
+                            </h3>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="name" class="label">Full Name <span
+                                            class="text-red-500">*</span></label>
+                                    <input type="text" id="name" name="name" value="{{ old('name') }}"
+                                        class="input-field @error('name') border-red-500 @enderror"
+                                        placeholder="Enter your full name" required>
+                                    @error('name')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="phone" class="label">Phone Number <span
+                                            class="text-red-500">*</span></label>
+                                    <input type="number" id="phone" name="phone" value="{{ old('phone') }}"
+                                        class="input-field @error('phone') border-red-500 @enderror"
+                                        placeholder="01XXXXXXXXX" required>
+                                    @error('phone')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Donation Type Selection -->
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
+                                </svg>
+                                Select Option
+                            </h3>
+
+                            <!-- Hidden input to store the selected donation type -->
+                            <input type="hidden" name="donation_type" id="donationType"
+                                value="{{ old('donation_type', '') }}" required>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
+                                    data-type="iftar" data-amount="250" onclick="selectDonation(this)">
+                                    <div class="text-2xl mb-2">🌙</div>
+                                    <div class="font-semibold text-gray-800">Iftar Only</div>
+                                    <div class="text-primary-600 font-bold">৳250</div>
+                                    <div class="check-icon hidden mt-2">
+                                        <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
+                                    data-type="jersey" data-amount="250" onclick="selectDonation(this)">
+                                    <div class="text-2xl mb-2">👕</div>
+                                    <div class="font-semibold text-gray-800">Jersey Only</div>
+                                    <div class="text-primary-600 font-bold">৳250</div>
+                                    <div class="check-icon hidden mt-2">
+                                        <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
+                                    data-type="both" data-amount="500" onclick="selectDonation(this)">
+                                    <div class="text-2xl mb-2">⭐</div>
+                                    <div class="font-semibold text-gray-800">Both</div>
+                                    <div class="text-gold-600 font-bold">৳500</div>
+                                    <div class="check-icon hidden mt-2">
+                                        <svg class="w-6 h-6 mx-auto text-gold-600" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @error('donation_type')
+                                <p class="text-red-500 text-sm mt-1 mb-2">{{ $message }}</p>
+                            @enderror
+
+                            <!-- Amount Display -->
+                            <div class="bg-gray-100 rounded-lg p-4 text-center">
+                                <span class="text-gray-600">Total Amount: </span>
+                                <span id="totalAmount" class="text-2xl font-bold text-primary-600">৳0</span>
+                            </div>
+                        </div>
+
+                        <!-- Jersey Details (Conditional) -->
+                        <div id="jerseySection" class="mb-8 hidden">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
+                                    </path>
+                                </svg>
+                                Jersey Details
+                            </h3>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="jersey_size_id" class="label">Jersey Size <span
+                                            class="text-red-500">*</span></label>
+                                    <select id="jersey_size_id" name="jersey_size_id"
+                                        class="input-field @error('jersey_size_id') border-red-500 @enderror">
+                                        <option value="">Select Size</option>
+                                        @foreach ($jerseySizes as $size)
+                                            <option value="{{ $size->id }}"
+                                                {{ old('jersey_size_id') == $size->id ? 'selected' : '' }}>
+                                                {{ $size->size }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('jersey_size_id')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="name_on_jersey" class="label">Name on Jersey <span
+                                            class="text-red-500">*</span></label>
+                                    <input type="text" id="name_on_jersey" name="name_on_jersey"
+                                        value="{{ old('name_on_jersey') }}"
+                                        class="input-field @error('name_on_jersey') border-red-500 @enderror"
+                                        placeholder="Max 15 characters" maxlength="15">
+                                    @error('name_on_jersey')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="number_on_jersey" class="label">Number on Jersey <span
+                                            class="text-red-500">*</span></label>
+                                    <input type="text" id="number_on_jersey" name="number_on_jersey"
+                                        value="{{ old('number_on_jersey') }}"
+                                        class="input-field @error('number_on_jersey') border-red-500 @enderror"
+                                        placeholder="e.g., 10" maxlength="5">
+                                    @error('number_on_jersey')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Information -->
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z">
+                                    </path>
+                                </svg>
+                                Payment Information
+                            </h3>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="sent_from" class="label">Sent From Number <span
+                                            class="text-red-500">*</span></label>
+                                    <input type="number" id="sent_from" name="sent_from"
+                                        value="{{ old('sent_from') }}"
+                                        class="input-field @error('sent_from') border-red-500 @enderror"
+                                        placeholder="Your mobile number from which you sent money" required>
+                                    @error('sent_from')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="sent_to_phone_id" class="label">Sent To Number <span
+                                            class="text-red-500">*</span></label>
+                                    <select id="sent_to_phone_id" name="sent_to_phone_id"
+                                        class="input-field @error('sent_to_phone_id') border-red-500 @enderror"
+                                        required>
+                                        <option value="">Select receiving number</option>
+                                        @foreach ($phoneNumbers as $phone)
+                                            <option value="{{ $phone->id }}"
+                                                {{ old('sent_to_phone_id') == $phone->id ? 'selected' : '' }}>
+                                                {{ $phone->number }} ({{ $phone->operator }})
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('sent_to_phone_id')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="transaction_id" class="label">Transaction ID / Reference</label>
+                                    <input type="text" id="transaction_id" name="transaction_id"
+                                        value="{{ old('transaction_id') }}"
+                                        class="input-field @error('transaction_id') border-red-500 @enderror"
+                                        placeholder="Enter bKash/Nagad transaction ID">
+                                    @error('transaction_id')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <!-- OR Divider -->
+                                <div class="flex items-center gap-4 my-2">
+                                    <div class="flex-1 h-px bg-gray-200"></div>
+                                    <span class="text-sm font-medium text-gray-400 uppercase">or</span>
+                                    <div class="flex-1 h-px bg-gray-200"></div>
+                                </div>
+
+                                <!-- Screenshot Upload -->
+                                <div>
+                                    <label for="screenshot" class="label">Payment Screenshot</label>
+                                    <div class="relative">
+                                        <label for="screenshot"
+                                            class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-primary-400 hover:bg-primary-50/50 transition-colors duration-200 @error('screenshot') border-red-500 @enderror"
+                                            id="screenshotDropZone">
+                                            <div id="screenshotPlaceholder"
+                                                class="flex flex-col items-center justify-center">
+                                                <svg class="w-8 h-8 text-gray-400 mb-2" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                    </path>
+                                                </svg>
+                                                <span class="text-sm text-gray-500">Click to upload screenshot</span>
+                                                <span class="text-xs text-gray-400 mt-1">PNG, JPG up to 5MB</span>
+                                            </div>
+                                            <div id="screenshotPreview" class="hidden flex items-center gap-3">
+                                                <img id="screenshotThumb" src="" alt="Preview"
+                                                    class="h-20 rounded-lg object-cover">
+                                                <div class="text-left">
+                                                    <p id="screenshotName" class="text-sm font-medium text-gray-700">
+                                                    </p>
+                                                    <p id="screenshotSize" class="text-xs text-gray-400"></p>
+                                                    <button type="button" onclick="clearScreenshot(event)"
+                                                        class="text-xs text-red-500 hover:text-red-700 font-medium mt-1 cursor-pointer">Remove</button>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <input type="file" id="screenshot" name="screenshot" accept="image/*"
+                                            class="hidden" onchange="previewScreenshot(this)">
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">Provide either a Transaction ID or a
+                                        screenshot as payment proof.</p>
+                                    @error('screenshot')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-primary w-full text-lg">
+                            Submit Registration
+                        </button>
+
+                        <p class="text-center text-sm text-gray-500 mt-4">
+                            By submitting, you agree to our terms and conditions.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-2">Government Islampur Nekjahan Pilot Model High School</h3>
+                <p class="text-gray-400 mb-4">SSC-2013 Batch</p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">
+                    &copy; {{ date('Y') }} SSC-2013 Batch. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // ── Screenshot Preview ──
+        function previewScreenshot(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('screenshotThumb').src = e.target.result;
+                    document.getElementById('screenshotName').textContent = file.name;
+                    document.getElementById('screenshotSize').textContent = (file.size / 1024 / 1024).toFixed(2) +
+                    ' MB';
+                    document.getElementById('screenshotPlaceholder').classList.add('hidden');
+                    document.getElementById('screenshotPreview').classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function clearScreenshot(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById('screenshot').value = '';
+            document.getElementById('screenshotThumb').src = '';
+            document.getElementById('screenshotPlaceholder').classList.remove('hidden');
+            document.getElementById('screenshotPreview').classList.add('hidden');
+        }
+
+        const donationTypeInput = document.getElementById('donationType');
+        const jerseySection = document.getElementById('jerseySection');
+        const totalAmountEl = document.getElementById('totalAmount');
+        const jerseyFields = ['jersey_size_id', 'name_on_jersey', 'number_on_jersey'];
+        const allCards = document.querySelectorAll('.donation-card');
+
+        function selectDonation(card) {
+            const type = card.dataset.type;
+            const amount = card.dataset.amount;
+
+            // If clicking the already-selected card, deselect it
+            if (donationTypeInput.value === type) {
+                donationTypeInput.value = '';
+                resetAllCards();
+                updateJerseySection(false);
+                totalAmountEl.textContent = '৳0';
+                return;
+            }
+
+            // Deselect all cards first
+            resetAllCards();
+
+            // Select the clicked card
+            donationTypeInput.value = type;
+
+            if (type === 'both') {
+                card.classList.remove('border-gray-200');
+                card.classList.add('border-gold-500', 'bg-gold-50', 'shadow-md');
+            } else {
+                card.classList.remove('border-gray-200');
+                card.classList.add('border-primary-500', 'bg-primary-50', 'shadow-md');
+            }
+
+            // Show checkmark
+            card.querySelector('.check-icon').classList.remove('hidden');
+
+            // Update amount
+            totalAmountEl.textContent = '৳' + amount;
+
+            // Toggle jersey section
+            const isJersey = type === 'jersey' || type === 'both';
+            updateJerseySection(isJersey);
+        }
+
+        function resetAllCards() {
+            allCards.forEach(c => {
+                c.classList.remove('border-primary-500', 'bg-primary-50', 'border-gold-500', 'bg-gold-50',
+                    'shadow-md');
+                c.classList.add('border-gray-200');
+                c.querySelector('.check-icon').classList.add('hidden');
+            });
+        }
+
+        function updateJerseySection(show) {
+            if (show) {
+                jerseySection.classList.remove('hidden');
+                jerseyFields.forEach(fieldId => {
+                    document.getElementById(fieldId).setAttribute('required', 'required');
+                });
+            } else {
+                jerseySection.classList.add('hidden');
+                jerseyFields.forEach(fieldId => {
+                    document.getElementById(fieldId).removeAttribute('required');
+                });
+            }
+        }
+
+        // Form validation: ensure donation_type is selected before submit
+        document.getElementById('donationForm').addEventListener('submit', function(e) {
+            if (!donationTypeInput.value) {
+                e.preventDefault();
+                alert('Please select a donation type.');
+                return false;
+            }
+        });
+
+        // Restore selection on page load (e.g., after validation error)
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedType = donationTypeInput.value;
+            if (savedType) {
+                allCards.forEach(card => {
+                    if (card.dataset.type === savedType) {
+                        selectDonation(card);
+                    }
+                });
+            }
+
+            // Fix input focus styles — Tailwind v4 Preflight overrides all CSS focus rules,
+            // so we must apply styles directly via JavaScript inline styles.
+            document.querySelectorAll('.input-field').forEach(field => {
+                // Set default border
+                field.style.setProperty('border', '1px solid #d1d5db', 'important');
+
+                field.addEventListener('focus', function() {
+                    this.style.setProperty('border', '1px solid #22c55e', 'important');
+                    this.style.setProperty('box-shadow', '0 0 0 3px rgba(22, 163, 74, 0.2)',
+                        'important');
+                    this.style.setProperty('outline', 'none', 'important');
+                });
+
+                field.addEventListener('blur', function() {
+                    this.style.setProperty('border', '1px solid #d1d5db', 'important');
+                    this.style.setProperty('box-shadow', 'none', 'important');
+                });
+            });
+
+            // ── Countdown Timer ──
+            const daysEl = document.getElementById('countdown-days');
+            const hoursEl = document.getElementById('countdown-hours');
+            const minutesEl = document.getElementById('countdown-minutes');
+            const secondsEl = document.getElementById('countdown-seconds');
+
+            if (daysEl && hoursEl && minutesEl && secondsEl) {
+                const iftarDate = '{{ $iftarDate ?? '' }}';
+                if (iftarDate) {
+                    const targetDate = new Date(iftarDate + 'T18:00:00').getTime();
+
+                    function updateCountdown() {
+                        const now = new Date().getTime();
+                        const diff = targetDate - now;
+
+                        if (diff <= 0) {
+                            daysEl.textContent = '0';
+                            hoursEl.textContent = '0';
+                            minutesEl.textContent = '0';
+                            secondsEl.textContent = '0';
+                            return;
+                        }
+
+                        daysEl.textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        hoursEl.textContent = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        minutesEl.textContent = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                        secondsEl.textContent = Math.floor((diff % (1000 * 60)) / 1000);
+                    }
+
+                    updateCountdown();
+                    setInterval(updateCountdown, 1000);
+                }
+            }
+
+            // ── Participant Counter Animation ──
+            const counterEl = document.getElementById('participant-count');
+            if (counterEl) {
+                const target = parseInt(counterEl.dataset.target) || 0;
+                if (target > 0) {
+                    const duration = 2000;
+                    const startTime = performance.now();
+
+                    function animateCounter(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        // Ease-out cubic
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        counterEl.textContent = Math.floor(eased * target);
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animateCounter);
+                        } else {
+                            counterEl.textContent = target;
+                        }
+                    }
+                    requestAnimationFrame(animateCounter);
+                }
+            }
+
+            // ── Hero Entrance Animations ──
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!prefersReducedMotion) {
+                const heroAnimElements = document.querySelectorAll('.hero-animate');
+                heroAnimElements.forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(30px)';
+                });
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const el = entry.target;
+                            const delay = parseFloat(el.style.animationDelay) || 0;
+                            setTimeout(() => {
+                                el.style.transition =
+                                    'opacity 0.7s ease-out, transform 0.7s ease-out';
+                                el.style.opacity = '1';
+                                el.style.transform = 'translateY(0)';
+                            }, delay * 1000);
+                            observer.unobserve(el);
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+
+                heroAnimElements.forEach(el => observer.observe(el));
+            }
+        });
+    </script>
+</body>
+
+</html>
