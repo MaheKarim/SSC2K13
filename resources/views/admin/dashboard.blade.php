@@ -126,11 +126,11 @@
             </div>
         </div>
 
-        <!-- Recent Donations -->
+        <!-- Recent Registrations -->
         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
             <div class="flex justify-between items-center p-6 pb-0">
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-900">Recent Donations</h3>
+                    <h3 class="text-lg font-semibold text-gray-900">Recent Registrations</h3>
                     <p class="text-sm text-gray-400 mt-0.5">Latest 10 registrations</p>
                 </div>
                 <a href="{{ route('admin.registrations.index') }}"
