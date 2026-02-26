@@ -40,10 +40,12 @@ class SmsService
 
             $result = $response->json();
 
-            Log::info('SMS sent', [
+            Log::info('SMS sent attempt', [
                 'mobile' => $mobileNumber,
                 'status' => $result['status'] ?? 'unknown',
+                'statusCode' => $result['statusCode'] ?? 'missing',
                 'trxnId' => $result['trxnId'] ?? null,
+                'errorDescription' => $result['errorDescription'] ?? null,
             ]);
 
             return [
