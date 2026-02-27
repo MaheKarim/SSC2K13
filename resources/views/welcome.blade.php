@@ -769,6 +769,94 @@
         </div>
     </section>
 
+    <!-- Verified Participants List Section -->
+    <section class="py-20 bg-white relative overflow-hidden" id="participants">
+        <!-- Background Decorative Elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div
+                class="absolute -top-40 -right-40 w-96 h-96 bg-primary-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50">
+            </div>
+            <div
+                class="absolute top-40 -left-40 w-96 h-96 bg-gold-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50">
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span
+                    class="inline-block py-1 px-3 rounded-full bg-primary-50 text-primary-600 text-sm font-semibold tracking-wider mb-4 border border-primary-100">COMMUNITY</span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">নিশ্চিতকৃত
+                    অংশগ্রহণকারী</h2>
+                <div class="w-20 h-1.5 bg-gradient-to-r from-primary-500 to-gold-400 mx-auto rounded-full mb-6"></div>
+                <p class="text-lg text-gray-500">যারা ইতোমধ্যে সফলভাবে রেজিস্ট্রেশন সম্পন্ন করেছেন এবং আমাদের সাথে
+                    যুক্ত হয়েছেন তাদের তালিকা</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                @forelse($verifiedList as $participant)
+                    <div
+                        class="group bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-primary-100 transition-all duration-300 relative overflow-hidden flex flex-col items-center">
+                        <!-- Card Glow on Hover -->
+                        <div
+                            class="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-primary-400/10 to-gold-400/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+                        </div>
+
+                        <!-- Avatar -->
+                        <div
+                            class="w-20 h-20 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 border-4 border-white shadow-md flex items-center justify-center mb-5 relative z-10 group-hover:-translate-y-1 transition-transform duration-300">
+                            <span
+                                class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-br from-primary-600 to-primary-800">
+                                {{ mb_substr($participant->name, 0, 1) }}
+                            </span>
+                        </div>
+
+                        <!-- Participant Info -->
+                        <h3
+                            class="text-lg font-bold text-gray-800 text-center mb-3 line-clamp-1 relative z-10 w-full group-hover:text-primary-600 transition-colors">
+                            {{ $participant->name }}</h3>
+
+                        <div
+                            class="mt-auto space-y-2 relative z-10 flex flex-col items-center w-full pt-4 border-t border-gray-50">
+                            @if (isset($participant->type) && $participant->type === 'sponsor')
+                                <span
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">
+                                    <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                        </path>
+                                    </svg>
+                                    সম্মানিত স্পনসর
+                                </span>
+                            @endif
+
+                            <span
+                                class="inline-flex items-center px-3 py-1 rounded-md text-xs font-semibold tracking-wide uppercase
+                                @if ($participant->donation_type === 'iftar') bg-green-50 text-green-700
+                                @elseif($participant->donation_type === 'jersey') bg-blue-50 text-blue-700
+                                @else bg-cyan-50 text-cyan-700 @endif">
+                                {{ $participant->donation_type_label }}
+                            </span>
+                        </div>
+                    </div>
+                @empty
+                    <div
+                        class="col-span-full py-16 flex flex-col items-center justify-center bg-gray-50/50 rounded-3xl border border-dashed border-gray-200">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm">
+                            <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class="text-gray-500 text-lg font-medium">এখনো কোনো অংশগ্রহণকারী নিশ্চিত হয়নি</p>
+                        <p class="text-gray-400 text-sm mt-1">তালিকাভুক্ত হতে আজই রেজিস্ট্রেশন করুন</p>
+                    </div>
+                @endforelse
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-4">

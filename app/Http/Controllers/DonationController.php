@@ -18,8 +18,9 @@ class DonationController extends Controller
         $iftarDate = SiteSetting::get('iftar_date');
         $registrationDeadline = SiteSetting::get('registration_deadline');
         $verifiedParticipants = Donation::where('status', 'verified')->count();
+        $verifiedList = Donation::where('status', 'verified')->latest()->get();
 
-        return view('welcome', compact('phoneNumbers', 'jerseySizes', 'iftarDate', 'registrationDeadline', 'verifiedParticipants'));
+        return view('welcome', compact('phoneNumbers', 'jerseySizes', 'iftarDate', 'registrationDeadline', 'verifiedParticipants', 'verifiedList'));
     }
 
     public function submit(Request $request)
