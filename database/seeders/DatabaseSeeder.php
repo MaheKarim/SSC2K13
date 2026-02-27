@@ -23,6 +23,14 @@ class DatabaseSeeder extends Seeder
             'is_active' => true,
         ]);
 
+        // Create another admin
+        Admin::create([
+            'name' => 'Sarif',
+            'email' => 'sarif@ssc2013.com',
+            'password' => Hash::make('@ssc2013'),
+            'is_active' => true,
+        ]);
+
         // Create phone numbers
         $phoneNumbers = [
             ['number' => '01711111111', 'operator' => 'bKash'],
@@ -40,7 +48,7 @@ class DatabaseSeeder extends Seeder
 
         // Create jersey sizes
         $sizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
-        
+
         foreach ($sizes as $size) {
             JerseySize::create([
                 'size' => $size,
