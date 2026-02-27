@@ -29,6 +29,20 @@ class DashboardController extends Controller
             ->take(10)
             ->get();
 
+        // Phone analytics
+        $phoneAnalytics = \Illuminate\Support\Facades\DB::table('donations')
+            ->select('sent_to_phone_id', \Illuminate\Support\Facades\DB::raw('count(*) as count'), \Illuminate\Support\Facades\DB::raw('sum(amount) as total_amount'))
+            ->where('status', 'verified')
+            ->whereNotNull('sent_to_phone_id')
+            ->groupBy('sent_to_phone_id')
+            ->get()
+            ->map(function ($stat) {
+                $phone = \App\Models\PhoneNumber::find($stat->sent_to_phone_id);
+                $stat->phone_number = $phone ? $phone->number : 'Unknown';
+                $stat->operator = $phone ? $phone->operator : 'Unknown';
+                return $stat;
+            });
+
         return view('admin.dashboard', compact(
             'totalDonations',
             'totalAmount',
@@ -39,7 +53,8 @@ class DashboardController extends Controller
             'pendingDonations',
             'sponsorAmount',
             'sponsorCount',
-            'recentDonations'
+            'recentDonations',
+            'phoneAnalytics'
         ));
     }
 }

@@ -170,6 +170,65 @@
             </div>
         </div>
 
+        <!-- Phone Number Payment Analytics -->
+        @if (isset($phoneAnalytics) && $phoneAnalytics->count() > 0)
+            <div class="mt-8 mb-4">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                    Payment Collection Methods
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    @foreach ($phoneAnalytics as $stat)
+                        <div
+                            class="group bg-white rounded-2xl border border-indigo-50 hover:border-indigo-100 p-5 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:shadow-lg transition-all duration-300 relative overflow-hidden">
+                            <!-- BG Decoration -->
+                            <div
+                                class="absolute -right-6 -top-6 w-24 h-24 bg-gradient-to-br from-indigo-50 to-blue-50 rounded-full group-hover:scale-150 transition-transform duration-500 z-0">
+                            </div>
+
+                            <div class="relative z-10">
+                                <!-- Header -->
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <p class="text-xs font-semibold text-indigo-600 uppercase tracking-widest">
+                                            {{ $stat->operator }}</p>
+                                        <p class="text-lg font-bold text-gray-900 font-mono mt-0.5 tracking-tight">
+                                            {{ $stat->phone_number }}</p>
+                                    </div>
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center border border-indigo-100/50 group-hover:bg-indigo-600 group-hover:text-white group-hover:border-indigo-600 transition-colors duration-300">
+                                        <svg class="w-5 h-5 text-indigo-500 group-hover:text-white transition-colors"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Stats -->
+                                <div class="grid grid-cols-2 gap-4 pt-4 border-t border-gray-50">
+                                    <div>
+                                        <p class="text-xs text-gray-400 font-medium">Registrations</p>
+                                        <p class="text-lg font-semibold text-gray-800">{{ $stat->count }} <span
+                                                class="text-xs text-gray-400 font-normal">users</span></p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-gray-400 font-medium">Collected</p>
+                                        <p class="text-lg font-bold text-indigo-600">
+                                            ৳{{ number_format($stat->total_amount, 2) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
         <!-- Recent Registrations -->
         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
             <div class="flex justify-between items-center p-6 pb-0">
