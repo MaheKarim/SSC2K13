@@ -16,20 +16,24 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create default admin
-        Admin::create([
-            'name' => 'Admin',
-            'email' => 'admin@ssc2013.com',
-            'password' => Hash::make('admin123'),
-            'is_active' => true,
-        ]);
+        Admin::firstOrCreate(
+            ['email' => 'admin@ssc2013.com'],
+            [
+                'name' => 'Admin',
+                'password' => Hash::make('admin123'),
+                'is_active' => true,
+            ]
+        );
 
         // Create another admin
-        Admin::create([
-            'name' => 'Sarif',
-            'email' => 'sarif@ssc2013.com',
-            'password' => Hash::make('@ssc2013'),
-            'is_active' => true,
-        ]);
+        Admin::firstOrCreate(
+            ['email' => 'sarif@ssc2013.com'],
+            [
+                'name' => 'Sarif',
+                'password' => Hash::make('@ssc2013'),
+                'is_active' => true,
+            ]
+        );
 
         // Create phone numbers
         $phoneNumbers = [
