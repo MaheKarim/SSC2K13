@@ -16,13 +16,19 @@ class DonationController extends Controller
         $phoneNumbers = PhoneNumber::where('active', true)->get();
         $jerseySizes = JerseySize::where('active', true)->get();
         $iftarDate = SiteSetting::get('iftar_date');
+        $registrationDeadline = SiteSetting::get('registration_deadline');
         $verifiedParticipants = Donation::where('status', 'verified')->count();
 
-        return view('welcome', compact('phoneNumbers', 'jerseySizes', 'iftarDate', 'verifiedParticipants'));
+        return view('welcome', compact('phoneNumbers', 'jerseySizes', 'iftarDate', 'registrationDeadline', 'verifiedParticipants'));
     }
 
     public function submit(Request $request)
     {
+        $registrationDeadline = SiteSetting::get('registration_deadline');
+        if ($registrationDeadline && now()->greaterThan(\Carbon\Carbon::parse($registrationDeadline))) {
+            return back()->with('error', 'Registration for this event is now closed.');
+        }
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:20'],

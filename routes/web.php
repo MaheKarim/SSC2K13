@@ -24,11 +24,9 @@ Route::get('/donation/success/{hash}', [DonationController::class, 'success'])->
 |--------------------------------------------------------------------------
 */
 Route::prefix('admin')->name('admin.')->group(function () {
-    // Guest routes (login)
-    Route::middleware('guest:admin')->group(function () {
-        Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-        Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-    });
+    // Login routes - not using guest middleware to allow custom redirect for logged-in users
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
     // Protected admin routes
     Route::middleware(['auth.admin'])->group(function () {
@@ -38,6 +36,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Registrations
         Route::get('/registrations', [AdminDonationController::class, 'index'])->name('registrations.index');
+        Route::get('/registrations/create', [AdminDonationController::class, 'createManual'])->name('registrations.create');
+        Route::post('/registrations', [AdminDonationController::class, 'storeManual'])->name('registrations.store');
         Route::get('/registrations/{donation}', [AdminDonationController::class, 'show'])->name('registrations.show');
         Route::post('/registrations/{donation}/verify', [AdminDonationController::class, 'verify'])->name('registrations.verify');
         Route::get('/registrations/export', [AdminDonationController::class, 'export'])->name('registrations.export');

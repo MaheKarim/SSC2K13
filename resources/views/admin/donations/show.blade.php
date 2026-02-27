@@ -55,7 +55,22 @@
                     <h4 class="font-semibold text-gray-700 border-b pb-2">Registration Information</h4>
 
                     <div>
-                        <p class="text-sm text-gray-500">Donation Type</p>
+                        <p class="text-sm text-gray-500">Registration For</p>
+                        @if ($donation->type === 'sponsor')
+                            <span
+                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 mt-1">
+                                Sponsor
+                            </span>
+                        @else
+                            <span
+                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 mt-1">
+                                Participant
+                            </span>
+                        @endif
+                    </div>
+
+                    <div>
+                        <p class="text-sm text-gray-500">Registration Type</p>
                         <p class="font-medium text-gray-800">{{ $donation->donation_type_label }}</p>
                     </div>
 
@@ -63,6 +78,13 @@
                         <p class="text-sm text-gray-500">Amount</p>
                         <p class="font-medium text-gray-800 text-xl">৳{{ number_format($donation->amount, 2) }}</p>
                     </div>
+
+                    @if ($donation->collect_by)
+                        <div>
+                            <p class="text-sm text-gray-500">Collected By</p>
+                            <p class="font-medium text-gray-800">{{ $donation->collect_by }}</p>
+                        </div>
+                    @endif
 
                     <div>
                         <p class="text-sm text-gray-500">Transaction ID</p>

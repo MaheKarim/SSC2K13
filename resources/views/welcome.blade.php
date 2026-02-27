@@ -138,8 +138,8 @@
                     jersey.
                 </p>
 
-                <!-- Info Cards Row: Countdown + Participants -->
-                <div class="hero-animate grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-12"
+                <!-- Info Cards Row: Countdown + Participants + Deadline -->
+                <div class="hero-animate grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12"
                     style="animation-delay: 0.6s;">
                     <!-- Iftar Countdown Card -->
                     <div class="glass-card p-6 rounded-2xl">
@@ -204,6 +204,69 @@
                             <div class="flex items-center justify-center gap-1.5 mt-4">
                                 <span class="participant-pulse"></span>
                                 <span class="text-xs text-green-400 font-medium">Verified & Confirmed</span>
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Registration Deadline Card -->
+                    @php
+                        $isUrgent = false;
+                        if ($registrationDeadline) {
+                            $deadlineDate = \Carbon\Carbon::parse($registrationDeadline);
+                            $isUrgent = now()->diffInDays($deadlineDate, false) <= 3 && now()->lessThan($deadlineDate);
+                        }
+                    @endphp
+                    <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                        @if ($isUrgent)
+                            <!-- Urgent warning glow -->
+                            <div
+                                class="absolute inset-0 bg-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            </div>
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-orange-500">
+                            </div>
+                        @endif
+
+                        <div class="flex items-center justify-center gap-2 mb-4">
+                            <svg class="w-5 h-5 {{ $isUrgent ? 'text-red-400' : 'text-primary-400' }}" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                            <h3
+                                class="text-sm font-semibold {{ $isUrgent ? 'text-red-100' : 'text-white/80' }} uppercase tracking-wider">
+                                Registration Ends</h3>
+                        </div>
+
+                        @if ($registrationDeadline)
+                            @if (\Carbon\Carbon::parse($registrationDeadline)->isPast())
+                                <p class="text-red-400 font-bold text-2xl mb-1">Closed</p>
+                                <p class="text-white/40 text-sm">Registration has ended</p>
+                            @else
+                                <p class="text-white/90 font-bold text-2xl mb-1">
+                                    {{ \Carbon\Carbon::parse($registrationDeadline)->format('d M') }}</p>
+                                <p class="text-white/60 text-sm font-medium">
+                                    {{ \Carbon\Carbon::parse($registrationDeadline)->format('h:i A') }}</p>
+
+                                <div class="mt-4 flex flex-col items-center">
+                                    @if ($isUrgent)
+                                        <div
+                                            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/20 border border-red-500/30">
+                                            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                                            <span
+                                                class="text-xs font-semibold text-red-300 uppercase tracking-widest">{{ now()->diffInDays(\Carbon\Carbon::parse($registrationDeadline)) }}
+                                                Days Left!</span>
+                                        </div>
+                                    @else
+                                        <span
+                                            class="text-xs text-primary-300/80 uppercase tracking-widest font-medium">Don't
+                                            miss out</span>
+                                    @endif
+                                </div>
+                            @endif
+                        @else
+                            <div class="flex flex-col items-center justify-center h-full pt-2">
+                                <p class="text-white/40 text-sm italic">Open until further notice</p>
                             </div>
                         @endif
                     </div>
@@ -384,290 +447,323 @@
                     <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">রেজিস্ট্রেশন ফর্ম</h2>
                     <p class="text-center text-gray-600 mb-8">রেজিস্ট্রেশন সম্পন্ন করতে আপনার তথ্যগুলো দিন</p>
 
-                    <form action="{{ route('donation.submit') }}" method="POST" id="donationForm"
-                        enctype="multipart/form-data">
-                        @csrf
-
-                        <!-- Personal Information -->
-                        <div class="mb-8">
-                            <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
-                                ব্যক্তিগত তথ্য
-                            </h3>
-
-                            <div class="space-y-4">
-                                <div>
-                                    <label for="name" class="label">পুরো নাম <span
-                                            class="text-red-500">*</span></label>
-                                    <input type="text" id="name" name="name" value="{{ old('name') }}"
-                                        class="input-field @error('name') border-red-500 @enderror"
-                                        placeholder="আপনার পুরো নাম লিখুন" required>
-                                    @error('name')
-                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <div>
-                                    <label for="phone" class="label">মোবাইল নম্বর <span
-                                            class="text-red-500">*</span></label>
-                                    <input type="number" id="phone" name="phone" value="{{ old('phone') }}"
-                                        class="input-field @error('phone') border-red-500 @enderror"
-                                        placeholder="01XXXXXXXXX" required>
-                                    @error('phone')
-                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
+                    @if (session('error'))
+                        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-r">
+                            <p>{{ session('error') }}</p>
                         </div>
+                    @endif
 
-                        <!-- Donation Type Selection -->
-                        <div class="mb-8">
-                            <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
+                    @php
+                        $isClosed =
+                            $registrationDeadline && now()->greaterThan(\Carbon\Carbon::parse($registrationDeadline));
+                    @endphp
+
+                    @if ($isClosed)
+                        <div class="text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+                            <div
+                                class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
                                     </path>
                                 </svg>
-                                অপশন নির্বাচন করুন
-                            </h3>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">রেজিস্ট্রেশন বন্ধ হয়ে গেছে</h3>
+                            <p class="text-gray-600 max-w-md mx-auto">নির্ধারিত সময় পার হয়ে যাওয়ায় বর্তমানে নতুন
+                                রেজিস্ট্রেশন গ্রহণ করা হচ্ছে না। যেকোনো প্রয়োজনে আয়োজকদের সাথে যোগাযোগ করুন।</p>
+                        </div>
+                    @else
+                        <form action="{{ route('donation.submit') }}" method="POST" id="donationForm"
+                            enctype="multipart/form-data">
+                            @csrf
 
-                            <!-- Hidden input to store the selected donation type -->
-                            <input type="hidden" name="donation_type" id="donationType"
-                                value="{{ old('donation_type', '') }}" required>
+                            <!-- Personal Information -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
+                                        </path>
+                                    </svg>
+                                    ব্যক্তিগত তথ্য
+                                </h3>
 
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                                <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
-                                    data-type="iftar" data-amount="250" onclick="selectDonation(this)">
-                                    <div class="text-2xl mb-2">🌙</div>
-                                    <div class="font-semibold text-gray-800">শুধুমাত্র ইফতার</div>
-                                    <div class="text-primary-600 font-bold">৳250</div>
-                                    <div class="check-icon hidden mt-2">
-                                        <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
-                                            stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="name" class="label">পুরো নাম <span
+                                                class="text-red-500">*</span></label>
+                                        <input type="text" id="name" name="name"
+                                            value="{{ old('name') }}"
+                                            class="input-field @error('name') border-red-500 @enderror"
+                                            placeholder="আপনার পুরো নাম লিখুন" required>
+                                        @error('name')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
-                                </div>
 
-                                <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
-                                    data-type="jersey" data-amount="250" onclick="selectDonation(this)">
-                                    <div class="text-2xl mb-2">👕</div>
-                                    <div class="font-semibold text-gray-800">শুধুমাত্র জার্সি</div>
-                                    <div class="text-primary-600 font-bold">৳250</div>
-                                    <div class="check-icon hidden mt-2">
-                                        <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
-                                            stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-
-                                <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
-                                    data-type="both" data-amount="500" onclick="selectDonation(this)">
-                                    <div class="text-2xl mb-2">⭐</div>
-                                    <div class="font-semibold text-gray-800">ইফতার + জার্সি</div>
-                                    <div class="text-gold-600 font-bold">৳500</div>
-                                    <div class="check-icon hidden mt-2">
-                                        <svg class="w-6 h-6 mx-auto text-gold-600" fill="none"
-                                            stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
+                                    <div>
+                                        <label for="phone" class="label">মোবাইল নম্বর <span
+                                                class="text-red-500">*</span></label>
+                                        <input type="number" id="phone" name="phone"
+                                            value="{{ old('phone') }}"
+                                            class="input-field @error('phone') border-red-500 @enderror"
+                                            placeholder="01XXXXXXXXX" required>
+                                        @error('phone')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
 
-                            @error('donation_type')
-                                <p class="text-red-500 text-sm mt-1 mb-2">{{ $message }}</p>
-                            @enderror
+                            <!-- Donation Type Selection -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        </path>
+                                    </svg>
+                                    অপশন নির্বাচন করুন
+                                </h3>
 
-                            <!-- Amount Display -->
-                            <div class="bg-gray-100 rounded-lg p-4 text-center">
-                                <span class="text-gray-600">মোট পরিমাণ: </span>
-                                <span id="totalAmount" class="text-2xl font-bold text-primary-600">৳0</span>
+                                <!-- Hidden input to store the selected donation type -->
+                                <input type="hidden" name="donation_type" id="donationType"
+                                    value="{{ old('donation_type', '') }}" required>
+
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                    <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
+                                        data-type="iftar" data-amount="250" onclick="selectDonation(this)">
+                                        <div class="text-2xl mb-2">🌙</div>
+                                        <div class="font-semibold text-gray-800">শুধুমাত্র ইফতার</div>
+                                        <div class="text-primary-600 font-bold">৳250</div>
+                                        <div class="check-icon hidden mt-2">
+                                            <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
+                                        data-type="jersey" data-amount="250" onclick="selectDonation(this)">
+                                        <div class="text-2xl mb-2">👕</div>
+                                        <div class="font-semibold text-gray-800">শুধুমাত্র জার্সি</div>
+                                        <div class="text-primary-600 font-bold">৳250</div>
+                                        <div class="check-icon hidden mt-2">
+                                            <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
+                                        data-type="both" data-amount="500" onclick="selectDonation(this)">
+                                        <div class="text-2xl mb-2">⭐</div>
+                                        <div class="font-semibold text-gray-800">ইফতার + জার্সি</div>
+                                        <div class="text-gold-600 font-bold">৳500</div>
+                                        <div class="check-icon hidden mt-2">
+                                            <svg class="w-6 h-6 mx-auto text-gold-600" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @error('donation_type')
+                                    <p class="text-red-500 text-sm mt-1 mb-2">{{ $message }}</p>
+                                @enderror
+
+                                <!-- Amount Display -->
+                                <div class="bg-gray-100 rounded-lg p-4 text-center">
+                                    <span class="text-gray-600">মোট পরিমাণ: </span>
+                                    <span id="totalAmount" class="text-2xl font-bold text-primary-600">৳0</span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Jersey Details (Conditional) -->
-                        <div id="jerseySection" class="mb-8 hidden">
-                            <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
-                                    </path>
-                                </svg>
-                                জার্সির বিবরণ
-                            </h3>
+                            <!-- Jersey Details (Conditional) -->
+                            <div id="jerseySection" class="mb-8 hidden">
+                                <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
+                                        </path>
+                                    </svg>
+                                    জার্সির বিবরণ
+                                </h3>
 
-                            <div class="space-y-4">
-                                <div>
-                                    <label for="jersey_size_id" class="label">জার্সির সাইজ <span
-                                            class="text-red-500">*</span></label>
-                                    <select id="jersey_size_id" name="jersey_size_id"
-                                        class="input-field @error('jersey_size_id') border-red-500 @enderror">
-                                        <option value="">সাইজ নির্বাচন করুন</option>
-                                        @foreach ($jerseySizes as $size)
-                                            <option value="{{ $size->id }}"
-                                                {{ old('jersey_size_id') == $size->id ? 'selected' : '' }}>
-                                                {{ $size->size }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('jersey_size_id')
-                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="jersey_size_id" class="label">জার্সির সাইজ <span
+                                                class="text-red-500">*</span></label>
+                                        <select id="jersey_size_id" name="jersey_size_id"
+                                            class="input-field @error('jersey_size_id') border-red-500 @enderror">
+                                            <option value="">সাইজ নির্বাচন করুন</option>
+                                            @foreach ($jerseySizes as $size)
+                                                <option value="{{ $size->id }}"
+                                                    {{ old('jersey_size_id') == $size->id ? 'selected' : '' }}>
+                                                    {{ $size->size }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('jersey_size_id')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
+                                    </div>
 
-                                <div>
-                                    <label for="name_on_jersey" class="label">জার্সিতে নাম <span
-                                            class="text-red-500">*</span></label>
-                                    <input type="text" id="name_on_jersey" name="name_on_jersey"
-                                        value="{{ old('name_on_jersey') }}"
-                                        class="input-field @error('name_on_jersey') border-red-500 @enderror"
-                                        placeholder="সর্বোচ্চ ১৫ অক্ষর" maxlength="15">
-                                    @error('name_on_jersey')
-                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                                    <div>
+                                        <label for="name_on_jersey" class="label">জার্সিতে নাম <span
+                                                class="text-red-500">*</span></label>
+                                        <input type="text" id="name_on_jersey" name="name_on_jersey"
+                                            value="{{ old('name_on_jersey') }}"
+                                            class="input-field @error('name_on_jersey') border-red-500 @enderror"
+                                            placeholder="সর্বোচ্চ ১৫ অক্ষর" maxlength="15">
+                                        @error('name_on_jersey')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
+                                    </div>
 
-                                <div>
-                                    <label for="number_on_jersey" class="label">জার্সিতে নম্বর <span
-                                            class="text-red-500">*</span></label>
-                                    <input type="text" id="number_on_jersey" name="number_on_jersey"
-                                        value="{{ old('number_on_jersey') }}"
-                                        class="input-field @error('number_on_jersey') border-red-500 @enderror"
-                                        placeholder="যেমন, ১০" maxlength="5">
-                                    @error('number_on_jersey')
-                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
+                                    <div>
+                                        <label for="number_on_jersey" class="label">জার্সিতে নম্বর <span
+                                                class="text-red-500">*</span></label>
+                                        <input type="text" id="number_on_jersey" name="number_on_jersey"
+                                            value="{{ old('number_on_jersey') }}"
+                                            class="input-field @error('number_on_jersey') border-red-500 @enderror"
+                                            placeholder="যেমন, ১০" maxlength="5">
+                                        @error('number_on_jersey')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Payment Information -->
-                        <div class="mb-8">
-                            <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z">
-                                    </path>
-                                </svg>
-                                পেমেন্টের তথ্য
-                            </h3>
+                            <!-- Payment Information -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z">
+                                        </path>
+                                    </svg>
+                                    পেমেন্টের তথ্য
+                                </h3>
 
-                            <div class="space-y-4">
-                                <div>
-                                    <label for="sent_from" class="label">যে নম্বর থেকে পাঠিয়েছেন <span
-                                            class="text-red-500">*</span></label>
-                                    <input type="number" id="sent_from" name="sent_from"
-                                        value="{{ old('sent_from') }}"
-                                        class="input-field @error('sent_from') border-red-500 @enderror"
-                                        placeholder="যে নম্বর থেকে টাকা পাঠিয়েছেন" required>
-                                    @error('sent_from')
-                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="sent_from" class="label">যে নম্বর থেকে পাঠিয়েছেন <span
+                                                class="text-red-500">*</span></label>
+                                        <input type="number" id="sent_from" name="sent_from"
+                                            value="{{ old('sent_from') }}"
+                                            class="input-field @error('sent_from') border-red-500 @enderror"
+                                            placeholder="যে নম্বর থেকে টাকা পাঠিয়েছেন" required>
+                                        @error('sent_from')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
+                                    </div>
 
-                                <div>
-                                    <label for="sent_to_phone_id" class="label">যে নম্বরে পাঠিয়েছেন <span
-                                            class="text-red-500">*</span></label>
-                                    <select id="sent_to_phone_id" name="sent_to_phone_id"
-                                        class="input-field @error('sent_to_phone_id') border-red-500 @enderror"
-                                        required>
-                                        <option value="">যে নম্বরে টাকা পাঠিয়েছেন তা নির্বাচন করুন</option>
-                                        @foreach ($phoneNumbers as $phone)
-                                            <option value="{{ $phone->id }}"
-                                                {{ old('sent_to_phone_id') == $phone->id ? 'selected' : '' }}>
-                                                {{ $phone->number }} ({{ $phone->operator }})
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('sent_to_phone_id')
-                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                                    <div>
+                                        <label for="sent_to_phone_id" class="label">যে নম্বরে পাঠিয়েছেন <span
+                                                class="text-red-500">*</span></label>
+                                        <select id="sent_to_phone_id" name="sent_to_phone_id"
+                                            class="input-field @error('sent_to_phone_id') border-red-500 @enderror"
+                                            required>
+                                            <option value="">যে নম্বরে টাকা পাঠিয়েছেন তা নির্বাচন করুন</option>
+                                            @foreach ($phoneNumbers as $phone)
+                                                <option value="{{ $phone->id }}"
+                                                    {{ old('sent_to_phone_id') == $phone->id ? 'selected' : '' }}>
+                                                    {{ $phone->number }} ({{ $phone->operator }})
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('sent_to_phone_id')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
+                                    </div>
 
-                                <div>
-                                    <label for="transaction_id" class="label">ট্রানজেকশন আইডি / রেফারেন্স</label>
-                                    <input type="text" id="transaction_id" name="transaction_id"
-                                        value="{{ old('transaction_id') }}"
-                                        class="input-field @error('transaction_id') border-red-500 @enderror"
-                                        placeholder="বিকাশ/নগদ ট্রানজেকশন আইডি দিন">
-                                    @error('transaction_id')
-                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                                    <div>
+                                        <label for="transaction_id" class="label">ট্রানজেকশন আইডি / রেফারেন্স</label>
+                                        <input type="text" id="transaction_id" name="transaction_id"
+                                            value="{{ old('transaction_id') }}"
+                                            class="input-field @error('transaction_id') border-red-500 @enderror"
+                                            placeholder="বিকাশ/নগদ ট্রানজেকশন আইডি দিন">
+                                        @error('transaction_id')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
+                                    </div>
 
-                                <!-- OR Divider -->
-                                <div class="flex items-center gap-4 my-2">
-                                    <div class="flex-1 h-px bg-gray-200"></div>
-                                    <span class="text-sm font-medium text-gray-400 uppercase">অথবা</span>
-                                    <div class="flex-1 h-px bg-gray-200"></div>
-                                </div>
+                                    <!-- OR Divider -->
+                                    <div class="flex items-center gap-4 my-2">
+                                        <div class="flex-1 h-px bg-gray-200"></div>
+                                        <span class="text-sm font-medium text-gray-400 uppercase">অথবা</span>
+                                        <div class="flex-1 h-px bg-gray-200"></div>
+                                    </div>
 
-                                <!-- Screenshot Upload -->
-                                <div>
-                                    <label for="screenshot" class="label">পেমেন্টের স্ক্রিনশট</label>
-                                    <div class="relative">
-                                        <label for="screenshot"
-                                            class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-primary-400 hover:bg-primary-50/50 transition-colors duration-200 @error('screenshot') border-red-500 @enderror"
-                                            id="screenshotDropZone">
-                                            <div id="screenshotPlaceholder"
-                                                class="flex flex-col items-center justify-center">
-                                                <svg class="w-8 h-8 text-gray-400 mb-2" fill="none"
-                                                    stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                    </path>
-                                                </svg>
-                                                <span class="text-sm text-gray-500">স্ক্রিনশট আপলোড করতে ক্লিক
-                                                    করুন</span>
-                                                <span class="text-xs text-gray-400 mt-1">সর্বোচ্চ ৫ মেগাবাইট (PNG,
-                                                    JPG)</span>
-                                            </div>
-                                            <div id="screenshotPreview" class="hidden flex items-center gap-3">
-                                                <img id="screenshotThumb" src="" alt="Preview"
-                                                    class="h-20 rounded-lg object-cover">
-                                                <div class="text-left">
-                                                    <p id="screenshotName" class="text-sm font-medium text-gray-700">
-                                                    </p>
-                                                    <p id="screenshotSize" class="text-xs text-gray-400"></p>
-                                                    <button type="button" onclick="clearScreenshot(event)"
-                                                        class="text-xs text-red-500 hover:text-red-700 font-medium mt-1 cursor-pointer">মুছুন</button>
+                                    <!-- Screenshot Upload -->
+                                    <div>
+                                        <label for="screenshot" class="label">পেমেন্টের স্ক্রিনশট</label>
+                                        <div class="relative">
+                                            <label for="screenshot"
+                                                class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-primary-400 hover:bg-primary-50/50 transition-colors duration-200 @error('screenshot') border-red-500 @enderror"
+                                                id="screenshotDropZone">
+                                                <div id="screenshotPlaceholder"
+                                                    class="flex flex-col items-center justify-center">
+                                                    <svg class="w-8 h-8 text-gray-400 mb-2" fill="none"
+                                                        stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                        </path>
+                                                    </svg>
+                                                    <span class="text-sm text-gray-500">স্ক্রিনশট আপলোড করতে ক্লিক
+                                                        করুন</span>
+                                                    <span class="text-xs text-gray-400 mt-1">সর্বোচ্চ ৫ মেগাবাইট (PNG,
+                                                        JPG)</span>
                                                 </div>
-                                            </div>
-                                        </label>
-                                        <input type="file" id="screenshot" name="screenshot" accept="image/*"
-                                            class="hidden" onchange="previewScreenshot(this)">
+                                                <div id="screenshotPreview" class="hidden flex items-center gap-3">
+                                                    <img id="screenshotThumb" src="" alt="Preview"
+                                                        class="h-20 rounded-lg object-cover">
+                                                    <div class="text-left">
+                                                        <p id="screenshotName"
+                                                            class="text-sm font-medium text-gray-700">
+                                                        </p>
+                                                        <p id="screenshotSize" class="text-xs text-gray-400"></p>
+                                                        <button type="button" onclick="clearScreenshot(event)"
+                                                            class="text-xs text-red-500 hover:text-red-700 font-medium mt-1 cursor-pointer">মুছুন</button>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                            <input type="file" id="screenshot" name="screenshot" accept="image/*"
+                                                class="hidden" onchange="previewScreenshot(this)">
+                                        </div>
+                                        <p class="text-xs text-gray-500 mt-1">পেমেন্টের প্রমাণ হিসেবে ট্রানজেকশন আইডি
+                                            অথবা
+                                            স্ক্রিনশট প্রদান করুন।</p>
+                                        @error('screenshot')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
-                                    <p class="text-xs text-gray-500 mt-1">পেমেন্টের প্রমাণ হিসেবে ট্রানজেকশন আইডি অথবা
-                                        স্ক্রিনশট প্রদান করুন।</p>
-                                    @error('screenshot')
-                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Submit Button -->
-                        <button type="submit" class="btn-primary w-full text-lg">
-                            রেজিস্ট্রেশন সাবমিট করুন
-                        </button>
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn-primary w-full text-lg">
+                                রেজিস্ট্রেশন সাবমিট করুন
+                            </button>
 
-                        <p class="text-center text-sm text-gray-500 mt-4">
-                            সাবমিট করার মাধ্যমে আপনি আমাদের শর্তাবলীতে সম্মত হচ্ছেন।
-                        </p>
-                    </form>
+                            <p class="text-center text-sm text-gray-500 mt-4">
+                                সাবমিট করার মাধ্যমে আপনি আমাদের শর্তাবলীতে সম্মত হচ্ছেন।
+                            </p>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

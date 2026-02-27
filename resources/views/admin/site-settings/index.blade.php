@@ -26,6 +26,21 @@
                         @enderror
                     </div>
 
+                    {{-- Registration Deadline --}}
+                    <div>
+                        <label for="registration_deadline" class="label">Registration Deadline</label>
+                        <input type="datetime-local" id="registration_deadline" name="registration_deadline"
+                            value="{{ old('registration_deadline', $registrationDeadline) }}"
+                            class="input-field @error('registration_deadline') border-red-500 @enderror">
+                        <p class="text-xs text-gray-500 mt-1">
+                            Set a deadline for registrations. The registration form will close after this date and time.
+                            Leave empty for no deadline.
+                        </p>
+                        @error('registration_deadline')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
 
 
                     <button type="submit" class="btn-primary">

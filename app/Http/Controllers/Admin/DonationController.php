@@ -121,4 +121,79 @@ class DonationController extends Controller
         fclose($output);
         exit;
     }
+
+    /**
+     * Show manual entry form for sponsors
+     */
+    public function createManual()
+    {
+        return view('admin.donations.create-manual');
+    }
+
+    /**
+     * Store manual entry for sponsors
+     */
+    public function storeManual(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:20'],
+            'donation_type' => ['required', 'in:iftar,jersey,both'],
+            'amount' => ['required', 'numeric', 'min:0'],
+            'collect_by' => ['required', 'string', 'max:255'],
+            'sent_from' => ['nullable', 'string', 'max:20'],
+            'sent_to_phone_id' => ['nullable', 'exists:phone_numbers,id'],
+            'transaction_id' => ['nullable', 'string', 'max:255'],
+            'status' => ['required', 'in:pending,verified'],
+            'notes' => ['nullable', 'string'],
+        ]);
+
+        // Add type as sponsor
+        $validated['type'] = 'sponsor';
+
+        // Set default values for optional fields
+        if (empty($validated['sent_from'])) {
+            $validated['sent_from'] = 'N/A';
+        }
+        if (empty($validated['sent_to_phone_id'])) {
+            // Get first active phone number or set null
+            $validated['sent_to_phone_id'] = \App\Models\PhoneNumber::where('active', true)->first()?->id ?? 1;
+        }
+        if (empty($validated['transaction_id'])) {
+            $validated['transaction_id'] = 'MANUAL-' . time();
+        }
+
+        // Create the donation
+        $donation = Donation::create($validated);
+
+        // Create jersey detail if applicable
+        if (in_array($validated['donation_type'], ['jersey', 'both'])) {
+            $request->validate([
+                'size_id' => ['required', 'exists:jersey_sizes,id'],
+                'name_on_jersey' => ['required', 'string', 'max:15'],
+                'number_on_jersey' => ['required', 'string', 'max:5'],
+            ]);
+
+            $donation->jerseyDetail()->create([
+                'size_id' => $request->size_id,
+                'name_on_jersey' => $request->name_on_jersey,
+                'number_on_jersey' => $request->number_on_jersey,
+            ]);
+        }
+
+        // Send SMS if status is verified
+        if ($validated['status'] === 'verified') {
+            $smsService = new SmsService();
+            $message = "SSC 2013 Batch এর রামাদান রিইউনিয়ন প্রোগ্রাম এবং NPL Season 9 (2026) এ রেজিস্ট্রেশন করার জন্য ধন্যবাদ। আপনার পেমেন্ট এবং রেজিস্ট্রেশন সফল হয়েছে। Developed By - Mahi Karim";
+            $result = $smsService->send($donation->phone, $message);
+
+            $donation->update([
+                'sms_sent' => $result['success'],
+                'sms_response' => $result['response'],
+            ]);
+        }
+
+        return redirect()->route('admin.registrations.index')
+            ->with('success', 'Sponsor registration added successfully.');
+    }
 }

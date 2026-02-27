@@ -4,6 +4,18 @@
 
 @section('content')
     <div class="space-y-6">
+        <!-- Page Header -->
+        <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-800">Registrations</h1>
+            <a href="{{ route('admin.registrations.create') }}" class="btn-primary flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                    </path>
+                </svg>
+                Add Sponsor
+            </a>
+        </div>
+
         <!-- Filters and Export -->
         <div class="card">
             <form action="{{ route('admin.registrations.index') }}" method="GET" class="flex flex-wrap gap-4 items-end">
@@ -52,9 +64,10 @@
                         <thead>
                             <tr class="border-b border-gray-200">
                                 <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Name</th>
-                                <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Type</th>
+                                <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Reg. For</th>
+                                <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Reg. Type</th>
                                 <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Amount</th>
-                                <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Payment Info</th>
+                                <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Collected By</th>
                                 <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Jersey Details</th>
                                 <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Status</th>
                                 <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Date</th>
@@ -73,6 +86,14 @@
                                     <td class="py-3 px-4 text-sm">
                                         <span
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                            @if ($donation->type === 'sponsor') bg-amber-100 text-amber-800
+                                            @else bg-gray-100 text-gray-800 @endif">
+                                            {{ ucfirst($donation->type ?? 'Participant') }}
+                                        </span>
+                                    </td>
+                                    <td class="py-3 px-4 text-sm">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
                                         @if ($donation->donation_type === 'iftar') bg-green-100 text-green-800
                                         @elseif($donation->donation_type === 'jersey') bg-blue-100 text-blue-800
                                         @else bg-purple-100 text-purple-800 @endif">
@@ -83,13 +104,11 @@
                                         ৳{{ number_format($donation->amount, 2) }}
                                     </td>
                                     <td class="py-3 px-4 text-sm">
-                                        <div>
-                                            <p class="text-xs text-gray-500">From: {{ $donation->sent_from }}</p>
-                                            <p class="text-xs text-gray-500">To:
-                                                {{ $donation->sentToPhone?->number ?? 'N/A' }}</p>
-                                            <p class="text-xs font-mono text-gray-600">ID: {{ $donation->transaction_id }}
-                                            </p>
-                                        </div>
+                                        @if ($donation->collect_by)
+                                            <span class="text-xs text-gray-600">{{ $donation->collect_by }}</span>
+                                        @else
+                                            <span class="text-xs text-gray-400">-</span>
+                                        @endif
                                     </td>
                                     <td class="py-3 px-4 text-sm">
                                         @if ($donation->jerseyDetail)

@@ -11,17 +11,20 @@ class SiteSettingController extends Controller
     public function index()
     {
         $iftarDate = SiteSetting::get('iftar_date');
+        $registrationDeadline = SiteSetting::get('registration_deadline');
 
-        return view('admin.site-settings.index', compact('iftarDate'));
+        return view('admin.site-settings.index', compact('iftarDate', 'registrationDeadline'));
     }
 
     public function update(Request $request)
     {
         $validated = $request->validate([
             'iftar_date' => ['nullable', 'date'],
+            'registration_deadline' => ['nullable', 'date'],
         ]);
 
         SiteSetting::set('iftar_date', $validated['iftar_date']);
+        SiteSetting::set('registration_deadline', $validated['registration_deadline']);
 
         return redirect()->route('admin.site-settings.index')
             ->with('success', 'Site settings updated successfully.');

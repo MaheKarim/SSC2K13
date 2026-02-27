@@ -145,6 +145,29 @@
                     @endif
                 </div>
             </div>
+
+            <!-- Verified Sponsor Money -->
+            <div
+                class="group relative overflow-hidden rounded-2xl bg-white border border-amber-100 p-5 shadow-sm hover:shadow-lg transition-all duration-300">
+                <div
+                    class="absolute top-0 right-0 w-24 h-24 -mt-4 -mr-4 rounded-full bg-gradient-to-br from-amber-500/10 to-yellow-500/10 group-hover:scale-125 transition-transform duration-500">
+                </div>
+                <div class="relative">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center shadow-lg shadow-amber-500/25">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="text-xs font-medium text-gray-400 uppercase tracking-wider mt-4">Verified Sponsors</p>
+                    <p class="text-2xl font-bold text-gray-900 mt-1">৳{{ number_format($sponsorAmount, 2) }}</p>
+                    @if ($sponsorCount > 0)
+                        <p class="text-xs text-gray-400 mt-1">{{ $sponsorCount }} sponsor(s)</p>
+                    @endif
+                </div>
+            </div>
         </div>
 
         <!-- Recent Registrations -->
@@ -205,13 +228,20 @@
                                         </div>
                                     </td>
                                     <td class="py-3.5 px-6">
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium
-                                            @if ($donation->donation_type === 'iftar') bg-amber-50 text-amber-700
-                                            @elseif($donation->donation_type === 'jersey') bg-sky-50 text-sky-700
-                                            @else bg-violet-50 text-violet-700 @endif">
-                                            {{ $donation->donation_type_label }}
-                                        </span>
+                                        @if ($donation->type === 'sponsor')
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-amber-100 text-amber-800">
+                                                Sponsor
+                                            </span>
+                                        @else
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium
+                                                @if ($donation->donation_type === 'iftar') bg-green-50 text-green-700
+                                                @elseif($donation->donation_type === 'jersey') bg-blue-50 text-blue-700
+                                                @else bg-purple-50 text-purple-700 @endif">
+                                                {{ $donation->donation_type_label }}
+                                            </span>
+                                        @endif
                                     </td>
                                     <td class="py-3.5 px-6 text-sm font-semibold text-gray-900">
                                         ৳{{ number_format($donation->amount, 2) }}
