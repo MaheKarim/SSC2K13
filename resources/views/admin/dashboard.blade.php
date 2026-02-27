@@ -210,16 +210,56 @@
                                 </div>
 
                                 <!-- Stats -->
-                                <div class="grid grid-cols-2 gap-4 pt-4 border-t border-gray-50">
-                                    <div>
-                                        <p class="text-xs text-gray-400 font-medium">Registrations</p>
-                                        <p class="text-lg font-semibold text-gray-800">{{ $stat->count }} <span
-                                                class="text-xs text-gray-400 font-normal">users</span></p>
+                                <div class="mt-4 pt-4 border-t border-indigo-100/50">
+                                    <div class="flex justify-between items-end mb-4">
+                                        <div>
+                                            <p class="text-xs text-gray-500 font-medium">Total Collected</p>
+                                            <p class="text-xl font-bold text-indigo-700">
+                                                ৳{{ number_format($stat->total_amount, 2) }}</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="text-xs text-gray-500 font-medium">Registrations</p>
+                                            <p class="text-lg font-semibold text-gray-800">{{ $stat->count }}</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p class="text-xs text-gray-400 font-medium">Collected</p>
-                                        <p class="text-lg font-bold text-indigo-600">
-                                            ৳{{ number_format($stat->total_amount, 2) }}</p>
+
+                                    <!-- Breakdown -->
+                                    <div class="space-y-2 bg-indigo-50/50 rounded-lg p-3 border border-indigo-100/30">
+                                        <!-- Iftar -->
+                                        <div class="flex justify-between items-center text-sm">
+                                            <div class="flex items-center space-x-2">
+                                                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                                <span class="text-gray-600 font-medium">Iftar</span>
+                                                <span
+                                                    class="text-xs text-gray-400 bg-white px-1.5 py-0.5 rounded-md border border-gray-100">{{ $stat->iftar_count }}</span>
+                                            </div>
+                                            <span
+                                                class="font-semibold text-gray-800">৳{{ number_format($stat->iftar_amount, 0) }}</span>
+                                        </div>
+
+                                        <!-- Jersey -->
+                                        <div class="flex justify-between items-center text-sm">
+                                            <div class="flex items-center space-x-2">
+                                                <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                                                <span class="text-gray-600 font-medium">Jersey</span>
+                                                <span
+                                                    class="text-xs text-gray-400 bg-white px-1.5 py-0.5 rounded-md border border-gray-100">{{ $stat->jersey_count }}</span>
+                                            </div>
+                                            <span
+                                                class="font-semibold text-gray-800">৳{{ number_format($stat->jersey_amount, 0) }}</span>
+                                        </div>
+
+                                        <!-- Both -->
+                                        <div class="flex justify-between items-center text-sm">
+                                            <div class="flex items-center space-x-2">
+                                                <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+                                                <span class="text-gray-600 font-medium">Both</span>
+                                                <span
+                                                    class="text-xs text-gray-400 bg-white px-1.5 py-0.5 rounded-md border border-gray-100">{{ $stat->both_count }}</span>
+                                            </div>
+                                            <span
+                                                class="font-semibold text-gray-800">৳{{ number_format($stat->both_amount, 0) }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -29,9 +29,19 @@ class DashboardController extends Controller
             ->take(10)
             ->get();
 
-        // Phone analytics
+        // Phone analytics with detailed breakdown
         $phoneAnalytics = \Illuminate\Support\Facades\DB::table('donations')
-            ->select('sent_to_phone_id', \Illuminate\Support\Facades\DB::raw('count(*) as count'), \Illuminate\Support\Facades\DB::raw('sum(amount) as total_amount'))
+            ->select(
+                'sent_to_phone_id',
+                \Illuminate\Support\Facades\DB::raw('count(*) as count'),
+                \Illuminate\Support\Facades\DB::raw('sum(amount) as total_amount'),
+                \Illuminate\Support\Facades\DB::raw('sum(case when donation_type = "iftar" then 1 else 0 end) as iftar_count'),
+                \Illuminate\Support\Facades\DB::raw('sum(case when donation_type = "iftar" then amount else 0 end) as iftar_amount'),
+                \Illuminate\Support\Facades\DB::raw('sum(case when donation_type = "jersey" then 1 else 0 end) as jersey_count'),
+                \Illuminate\Support\Facades\DB::raw('sum(case when donation_type = "jersey" then amount else 0 end) as jersey_amount'),
+                \Illuminate\Support\Facades\DB::raw('sum(case when donation_type = "both" then 1 else 0 end) as both_count'),
+                \Illuminate\Support\Facades\DB::raw('sum(case when donation_type = "both" then amount else 0 end) as both_amount')
+            )
             ->where('status', 'verified')
             ->whereNotNull('sent_to_phone_id')
             ->groupBy('sent_to_phone_id')
