@@ -99,6 +99,27 @@
                 </div>
             </div>
 
+            <!-- Iftar + Jersey (Both) Verified -->
+            <div
+                class="group relative overflow-hidden rounded-2xl bg-white border border-gray-100 p-5 shadow-sm hover:shadow-lg transition-all duration-300">
+                <div
+                    class="absolute top-0 right-0 w-24 h-24 -mt-4 -mr-4 rounded-full bg-gradient-to-br from-indigo-500/10 to-violet-500/10 group-hover:scale-125 transition-transform duration-500">
+                </div>
+                <div class="relative">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/25">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="text-xs font-medium text-gray-400 uppercase tracking-wider mt-4">Iftar + Jersey</p>
+                    <p class="text-2xl font-bold text-gray-900 mt-1">{{ $bothCount }}</p>
+                    <p class="text-xs text-gray-400 mt-1">৳{{ number_format($bothAmount, 2) }}</p>
+                </div>
+            </div>
+
             <!-- Pending Donations -->
             <div
                 class="group relative overflow-hidden rounded-2xl bg-white border border-red-100 p-5 shadow-sm hover:shadow-lg transition-all duration-300">
