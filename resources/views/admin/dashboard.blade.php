@@ -260,6 +260,22 @@
                                             <span
                                                 class="font-semibold text-gray-800">৳{{ number_format($stat->both_amount, 0) }}</span>
                                         </div>
+
+                                        @if (isset($stat->sponsor_count) && $stat->sponsor_count > 0)
+                                            <!-- Sponsor -->
+                                            <div
+                                                class="flex justify-between items-center text-sm pt-2 mt-2 border-t border-indigo-100/50">
+                                                <div class="flex items-center space-x-2">
+                                                    <span
+                                                        class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.5)]"></span>
+                                                    <span class="text-gray-800 font-bold tracking-wide">Sponsor</span>
+                                                    <span
+                                                        class="text-xs text-amber-700 bg-amber-100 font-bold px-1.5 py-0.5 rounded-md">{{ $stat->sponsor_count }}</span>
+                                                </div>
+                                                <span
+                                                    class="font-bold text-amber-600">৳{{ number_format($stat->sponsor_amount, 0) }}</span>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

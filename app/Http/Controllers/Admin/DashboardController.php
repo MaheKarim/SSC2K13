@@ -40,7 +40,9 @@ class DashboardController extends Controller
                 \Illuminate\Support\Facades\DB::raw('sum(case when donation_type = "jersey" then 1 else 0 end) as jersey_count'),
                 \Illuminate\Support\Facades\DB::raw('sum(case when donation_type = "jersey" then amount else 0 end) as jersey_amount'),
                 \Illuminate\Support\Facades\DB::raw('sum(case when donation_type = "both" then 1 else 0 end) as both_count'),
-                \Illuminate\Support\Facades\DB::raw('sum(case when donation_type = "both" then amount else 0 end) as both_amount')
+                \Illuminate\Support\Facades\DB::raw('sum(case when donation_type = "both" then amount else 0 end) as both_amount'),
+                \Illuminate\Support\Facades\DB::raw('sum(case when type = "sponsor" then 1 else 0 end) as sponsor_count'),
+                \Illuminate\Support\Facades\DB::raw('sum(case when type = "sponsor" then amount else 0 end) as sponsor_amount')
             )
             ->where('status', 'verified')
             ->whereNotNull('sent_to_phone_id')
