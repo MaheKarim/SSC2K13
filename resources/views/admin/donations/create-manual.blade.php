@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('page-title', 'Add Sponsor Registration')
+@section('page-title', 'Add Manual Registration')
 
 @section('content')
     <div class="max-w-4xl mx-auto">
@@ -8,8 +8,8 @@
         <div class="mb-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-2xl font-bold text-gray-800">Add Sponsor Registration</h1>
-                    <p class="text-gray-600 mt-1">Manually add a sponsor registration entry</p>
+                    <h1 class="text-2xl font-bold text-gray-800">Add Manual Registration</h1>
+                    <p class="text-gray-600 mt-1">Manually add a registration entry</p>
                 </div>
                 <a href="{{ route('admin.registrations.index') }}"
                     class="text-gray-600 hover:text-gray-800 flex items-center">
@@ -53,24 +53,39 @@
                     </div>
                 </div>
 
-                <!-- Sponsorship Type & Amount -->
+                <!-- Registration Type & Amount -->
                 <div class="mb-8">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-100">Sponsors Details</h3>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-100">Registration Details
+                    </h3>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <div>
-                            <label for="donation_type" class="label">Sponsorship Type <span
+                            <label for="type" class="label">Registration Role <span
+                                    class="text-red-500">*</span></label>
+                            <select id="type" name="type"
+                                class="input-field @error('type') border-red-500 @enderror" required>
+                                <option value="participant" {{ old('type') == 'participant' ? 'selected' : '' }}>Participant
+                                </option>
+                                <option value="sponsor" {{ old('type') == 'sponsor' ? 'selected' : '' }}>Sponsor</option>
+                            </select>
+                            @error('type')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="donation_type" class="label">Registration Type <span
                                     class="text-red-500">*</span></label>
                             <select id="donation_type" name="donation_type"
                                 class="input-field @error('donation_type') border-red-500 @enderror" required
                                 onchange="updateAmount()">
-                                <option value="">Select Sponsorship Type</option>
+                                <option value="">Select Registration Type</option>
                                 <option value="iftar" {{ old('donation_type') == 'iftar' ? 'selected' : '' }}>Iftar
-                                    Sponsorship</option>
+                                </option>
                                 <option value="jersey" {{ old('donation_type') == 'jersey' ? 'selected' : '' }}>Jersey
-                                    Sponsorship</option>
-                                <option value="both" {{ old('donation_type') == 'both' ? 'selected' : '' }}>Full
-                                    Sponsorship (Iftar + Jersey)</option>
+                                </option>
+                                <option value="both" {{ old('donation_type') == 'both' ? 'selected' : '' }}>Full Package
+                                    (Iftar + Jersey)</option>
                             </select>
                             @error('donation_type')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -78,7 +93,7 @@
                         </div>
 
                         <div>
-                            <label for="amount" class="label">Sponsorship Amount (৳) <span
+                            <label for="amount" class="label">Registration Amount (৳) <span
                                     class="text-red-500">*</span></label>
                             <input type="number" id="amount" name="amount" value="{{ old('amount') }}"
                                 class="input-field @error('amount') border-red-500 @enderror" placeholder="Enter amount"
@@ -125,7 +140,8 @@
                                         class="text-red-500">*</span></label>
                                 <input type="text" id="number_on_jersey" name="number_on_jersey"
                                     value="{{ old('number_on_jersey') }}"
-                                    class="input-field @error('number_on_jersey') border-red-500 @enderror" maxlength="5">
+                                    class="input-field @error('number_on_jersey') border-red-500 @enderror"
+                                    maxlength="5">
                                 @error('number_on_jersey')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
@@ -224,7 +240,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
-                        Add Sponsor Registration
+                        Add Manual Registration
                     </button>
                 </div>
             </form>

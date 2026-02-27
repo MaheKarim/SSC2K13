@@ -123,7 +123,7 @@ class DonationController extends Controller
     }
 
     /**
-     * Show manual entry form for sponsors
+     * Show manual entry form
      */
     public function createManual()
     {
@@ -131,13 +131,14 @@ class DonationController extends Controller
     }
 
     /**
-     * Store manual entry for sponsors
+     * Store manual entry
      */
     public function storeManual(Request $request)
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:20'],
+            'type' => ['required', 'in:participant,sponsor'],
             'donation_type' => ['required', 'in:iftar,jersey,both'],
             'amount' => ['required', 'numeric', 'min:0'],
             'collect_by' => ['required', 'string', 'max:255'],
@@ -147,9 +148,6 @@ class DonationController extends Controller
             'status' => ['required', 'in:pending,verified'],
             'notes' => ['nullable', 'string'],
         ]);
-
-        // Add type as sponsor
-        $validated['type'] = 'sponsor';
 
         // Set default values for optional fields
         if (empty($validated['sent_from'])) {
@@ -194,6 +192,6 @@ class DonationController extends Controller
         }
 
         return redirect()->route('admin.registrations.index')
-            ->with('success', 'Sponsor registration added successfully.');
+            ->with('success', 'Manual registration added successfully.');
     }
 }
