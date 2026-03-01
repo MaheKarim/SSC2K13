@@ -464,6 +464,39 @@ body {
     }
 }
 
+/* ======================================================
+   Mobile-first responsive overrides
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .card {
+        padding: 1rem;
+        border-radius: 0.625rem;
+    }
+
+    .btn-primary,
+    .btn-gold {
+        padding: 0.625rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .input-field {
+        padding: 0.625rem 0.75rem;
+        font-size: 16px; /* Prevents iOS zoom on focus */
+    }
+
+    .label {
+        font-size: 0.75rem;
+    }
+}
+
+/* iOS safe-area support */
+@supports (padding: env(safe-area-inset-bottom)) {
+    .safe-area-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
 /* Accessibility: respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
 
