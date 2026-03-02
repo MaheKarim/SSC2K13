@@ -11,10 +11,20 @@
                 <div class="absolute -top-8 -right-8 w-32 h-32 md:w-40 md:h-40 rounded-full bg-gold-400 blur-3xl"></div>
                 <div class="absolute -bottom-8 -left-8 w-32 h-32 md:w-40 md:h-40 rounded-full bg-primary-400 blur-3xl"></div>
             </div>
-            <div class="relative z-10">
-                <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-white">Welcome back 👋</h2>
-                <p class="text-slate-300 mt-1 text-sm md:text-base">Here's what's happening with your registrations today.
-                </p>
+            <div class="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 md:gap-4">
+                <div>
+                    <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-white">Welcome back 👋</h2>
+                    <p class="text-slate-300 mt-1 text-sm md:text-base">Here's what's happening with your registrations
+                        today.</p>
+                </div>
+                <a href="{{ route('home') }}" target="_blank"
+                    class="inline-flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white text-sm font-semibold rounded-xl border border-white/20 hover:border-white/30 transition-all duration-300 shrink-0 self-start sm:self-auto">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                    Go to Site
+                </a>
             </div>
         </div>
 

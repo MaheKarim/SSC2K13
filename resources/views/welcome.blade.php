@@ -11,6 +11,20 @@
 </head>
 
 <body class="font-sans antialiased">
+    <!-- Admin Dashboard Quick Access -->
+    @if (Auth::guard('admin')->check())
+        <a href="{{ route('admin.dashboard') }}"
+            class="fixed top-4 right-4 z-50 inline-flex items-center gap-2 px-3 py-2 md:px-4 md:py-2.5 bg-white/95 backdrop-blur-sm text-gray-800 text-sm font-semibold rounded-full shadow-lg hover:shadow-xl border border-gray-200/80 hover:bg-white transition-all duration-300 group">
+            <svg class="w-4 h-4 md:w-5 md:h-5 text-primary-600 group-hover:text-primary-700 transition-colors"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                </path>
+            </svg>
+            <span class="hidden sm:inline">Dashboard</span>
+        </a>
+    @endif
+
     <!-- Hero Section -->
     <section class="hero-section text-white relative overflow-hidden min-h-[90vh] flex items-center">
         <!-- Animated Background Orbs -->
@@ -84,7 +98,8 @@
             <svg class="islamic-lantern islamic-lantern-1" viewBox="0 0 32 48" fill="none">
                 <rect x="13" y="0" width="6" height="6" rx="1" fill="currentColor" opacity="0.7" />
                 <path d="M10 6 L22 6 L20 14 Q16 18 12 14 Z" fill="currentColor" opacity="0.6" />
-                <rect x="10" y="14" width="12" height="20" rx="2" fill="currentColor" opacity="0.4" />
+                <rect x="10" y="14" width="12" height="20" rx="2" fill="currentColor"
+                    opacity="0.4" />
                 <rect x="12" y="16" width="8" height="6" rx="1" fill="currentColor"
                     opacity="0.15" />
                 <rect x="12" y="24" width="8" height="6" rx="1" fill="currentColor"
