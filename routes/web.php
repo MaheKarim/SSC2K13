@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PhoneNumberController;
 use App\Http\Controllers\Admin\JerseySizeController;
 use App\Http\Controllers\Admin\DonationController as AdminDonationController;
 use App\Http\Controllers\Admin\SiteSettingController;
+use App\Http\Controllers\Admin\LoginHistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,5 +60,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Site Settings
         Route::get('/site-settings', [SiteSettingController::class, 'index'])->name('site-settings.index');
         Route::put('/site-settings', [SiteSettingController::class, 'update'])->name('site-settings.update');
+
+        // Login History
+        Route::get('/login-history', [LoginHistoryController::class, 'index'])->name('login-history.index');
     });
 });
