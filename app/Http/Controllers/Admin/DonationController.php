@@ -44,10 +44,21 @@ class DonationController extends Controller
     public function verify(Donation $donation)
     {
         $donation->update(['status' => 'verified']);
+        $donation->load('jerseyDetail.size');
 
         // Send SMS notification
         $smsService = new SmsService();
-        $message = "SSC 2013 Batch এর রামাদান রিইউনিয়ন প্রোগ্রাম এবং NPL Season 9 (2026) এ রেজিস্ট্রেশন করার জন্য ধন্যবাদ। আপনার পেমেন্ট এবং রেজিস্ট্রেশন সফল হয়েছে। Developed By - Mahi Karim";
+        $message = "SSC-2013 Iftar Mehfil & NPL S9/'26 ইভেন্টে আপনার রেজিস্ট্রেশন ও পেমেন্ট সফল হয়েছে।";
+
+        if ($donation->jerseyDetail) {
+            $jerseySize = $donation->jerseyDetail->size->size ?? 'N/A';
+            $nameOnJersey = $donation->jerseyDetail->name_on_jersey ?? 'N/A';
+            $numberOnJersey = $donation->jerseyDetail->number_on_jersey ?? 'N/A';
+            $message .= " আপনার Jersey Size: {$jerseySize} | Name: {$nameOnJersey} | Number: {$numberOnJersey}";
+        }
+
+        $message .= "\n– Developed By Mahe Karim";
+
         $result = $smsService->send($donation->phone, $message);
 
         $donation->update([
@@ -181,8 +192,19 @@ class DonationController extends Controller
 
         // Send SMS if status is verified
         if ($validated['status'] === 'verified') {
+            $donation->load('jerseyDetail.size');
             $smsService = new SmsService();
-            $message = "SSC 2013 Batch এর রামাদান রিইউনিয়ন প্রোগ্রাম এবং NPL Season 9 (2026) এ রেজিস্ট্রেশন করার জন্য ধন্যবাদ। আপনার পেমেন্ট এবং রেজিস্ট্রেশন সফল হয়েছে। Developed By - Mahi Karim";
+            $message = "SSC-2013 Iftar Mehfil & NPL S9 (2026) ইভেন্টে আপনার রেজিস্ট্রেশন ও পেমেন্ট সফল হয়েছে।";
+
+            if ($donation->jerseyDetail) {
+                $jerseySize = $donation->jerseyDetail->size->size ?? 'N/A';
+                $nameOnJersey = $donation->jerseyDetail->name_on_jersey ?? 'N/A';
+                $numberOnJersey = $donation->jerseyDetail->number_on_jersey ?? 'N/A';
+                $message .= " আপনার Jersey Size: {$jerseySize} | Name: {$nameOnJersey} | Number: {$numberOnJersey}";
+            }
+
+            $message .= "\n– Mahe Karim";
+
             $result = $smsService->send($donation->phone, $message);
 
             $donation->update([
