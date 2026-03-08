@@ -63,5 +63,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Login History
         Route::get('/login-history', [LoginHistoryController::class, 'index'])->name('login-history.index');
+
+        // Activity Log
+        Route::get('/activity-log', [LoginHistoryController::class, 'activityLog'])->name('activity-log.index');
     });
 });
