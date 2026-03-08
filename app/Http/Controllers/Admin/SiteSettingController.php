@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminActivity;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,14 @@ class SiteSettingController extends Controller
 
         SiteSetting::set('iftar_date', $validated['iftar_date']);
         SiteSetting::set('registration_deadline', $validated['registration_deadline']);
+
+        AdminActivity::log(
+            'updated',
+            'SiteSetting',
+            null,
+            'Updated site settings',
+            $validated
+        );
 
         return redirect()->route('admin.site-settings.index')
             ->with('success', 'Site settings updated successfully.');

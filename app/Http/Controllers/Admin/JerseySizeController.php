@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminActivity;
 use App\Models\JerseySize;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,14 @@ class JerseySizeController extends Controller
             'active' => ['boolean'],
         ]);
 
-        JerseySize::create($validated);
+        $jerseySize = JerseySize::create($validated);
+
+        AdminActivity::log(
+            'created',
+            'JerseySize',
+            $jerseySize->id,
+            "Added jersey size {$jerseySize->size}"
+        );
 
         return back()->with('success', 'Jersey size added successfully.');
     }
@@ -35,18 +43,44 @@ class JerseySizeController extends Controller
 
         $jerseySize->update($validated);
 
+        AdminActivity::log(
+            'updated',
+            'JerseySize',
+            $jerseySize->id,
+            "Updated jersey size {$jerseySize->size}"
+        );
+
         return back()->with('success', 'Jersey size updated successfully.');
     }
 
     public function destroy(JerseySize $jerseySize)
     {
+        $size = $jerseySize->size;
+        $sizeId = $jerseySize->id;
         $jerseySize->delete();
+
+        AdminActivity::log(
+            'deleted',
+            'JerseySize',
+            $sizeId,
+            "Deleted jersey size {$size}"
+        );
+
         return back()->with('success', 'Jersey size deleted successfully.');
     }
 
     public function toggleActive(JerseySize $jerseySize)
     {
         $jerseySize->update(['active' => !$jerseySize->active]);
+
+        $status = $jerseySize->active ? 'Activated' : 'Deactivated';
+        AdminActivity::log(
+            'toggled',
+            'JerseySize',
+            $jerseySize->id,
+            "{$status} jersey size {$jerseySize->size}"
+        );
+
         return back()->with('success', 'Jersey size status updated.');
     }
 }

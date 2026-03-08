@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminActivity;
 use App\Models\Donation;
 use App\Services\SmsService;
 use Illuminate\Http\Request;
@@ -44,6 +45,13 @@ class DonationController extends Controller
     public function verify(Donation $donation)
     {
         $donation->update(['status' => 'verified']);
+
+        AdminActivity::log(
+            'verified',
+            'Donation',
+            $donation->id,
+            "Verified registration #{$donation->id} by {$donation->name}"
+        );
         $donation->load('jerseyDetail.size');
 
         // Send SMS notification
@@ -174,6 +182,14 @@ class DonationController extends Controller
 
         // Create the donation
         $donation = Donation::create($validated);
+
+        AdminActivity::log(
+            'created',
+            'Donation',
+            $donation->id,
+            "Created manual registration for {$donation->name} ({$donation->donation_type_label})",
+            ['amount' => $donation->amount, 'type' => $validated['type'] ?? 'participant']
+        );
 
         // Create jersey detail if applicable
         if (in_array($validated['donation_type'], ['jersey', 'both'])) {
