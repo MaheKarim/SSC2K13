@@ -29,6 +29,14 @@
                         {{ ucfirst($donation->status) }}
                     </span>
 
+                    @if ($donation->is_transferred)
+                        <span
+                            class="inline-flex items-center px-2.5 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium bg-blue-100 text-blue-800"
+                            title="Transferred to Committee">
+                            Transferred
+                        </span>
+                    @endif
+
                     @if ($donation->sms_sent)
                         <div class="group relative flex items-center justify-center cursor-help">
                             <div
@@ -160,13 +168,25 @@
             @endif
 
             <!-- Actions -->
-            <div class="mt-4 md:mt-6 pt-4 md:pt-6 border-t flex justify-end space-x-2 md:space-x-3 p-4 md:p-6 pt-0">
+            <div
+                class="mt-4 md:mt-6 pt-4 md:pt-6 border-t flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2 md:space-x-3 p-4 md:p-6 pt-0">
                 @if ($donation->status === 'pending')
                     <form action="{{ route('admin.registrations.verify', $donation) }}" method="POST"
                         class="w-full sm:w-auto">
                         @csrf
                         <button type="submit" class="mobile-btn btn-primary w-full">
                             Verify Registration
+                        </button>
+                    </form>
+                @endif
+                @if ($donation->status === 'verified' && !$donation->is_transferred)
+                    <form action="{{ route('admin.registrations.transfer', $donation) }}" method="POST"
+                        class="w-full sm:w-auto"
+                        onsubmit="return confirm('Are you sure you want to mark this donation as transferred to the committee?');">
+                        @csrf
+                        <button type="submit"
+                            class="mobile-btn w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors border border-transparent flex items-center justify-center">
+                            Mark as Transferred
                         </button>
                     </form>
                 @endif

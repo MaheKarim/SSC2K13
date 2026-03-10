@@ -81,6 +81,20 @@ class DonationController extends Controller
         return back()->with('success', "Registration verified. {$smsStatus}");
     }
 
+    public function markTransferred(Donation $donation)
+    {
+        $donation->update(['is_transferred' => true]);
+
+        AdminActivity::log(
+            'updated',
+            'Donation',
+            $donation->id,
+            "Marked registration #{$donation->id} by {$donation->name} as transferred to committee"
+        );
+
+        return back()->with('success', 'Registration marked as transferred to committee successfully.');
+    }
+
     public function export(Request $request)
     {
         $query = Donation::with(['sentToPhone', 'jerseyDetail.size']);

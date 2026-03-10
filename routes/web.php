@@ -41,6 +41,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/registrations', [AdminDonationController::class, 'storeManual'])->name('registrations.store');
         Route::get('/registrations/{donation}', [AdminDonationController::class, 'show'])->name('registrations.show');
         Route::post('/registrations/{donation}/verify', [AdminDonationController::class, 'verify'])->name('registrations.verify');
+        Route::post('/registrations/{donation}/transfer', [AdminDonationController::class, 'markTransferred'])->name('registrations.transfer');
         Route::get('/registrations/export', [AdminDonationController::class, 'export'])->name('registrations.export');
 
         // Phone Numbers

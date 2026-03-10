@@ -173,7 +173,7 @@
 
             <!-- Verified Sponsor Money -->
             <div
-                class="group relative overflow-hidden rounded-xl md:rounded-2xl bg-white border border-amber-100 p-3 md:p-5 shadow-sm hover:shadow-lg transition-all duration-300 col-span-2 lg:col-span-1">
+                class="group relative overflow-hidden rounded-xl md:rounded-2xl bg-white border border-amber-100 p-3 md:p-5 shadow-sm hover:shadow-lg transition-all duration-300">
                 <div
                     class="absolute top-0 right-0 w-16 h-16 md:w-24 md:h-24 -mt-2 -mr-2 md:-mt-4 md:-mr-4 rounded-full bg-gradient-to-br from-amber-500/10 to-yellow-500/10 group-hover:scale-125 transition-transform duration-500">
                 </div>
@@ -193,6 +193,62 @@
                     </p>
                     @if ($sponsorCount > 0)
                         <p class="text-[10px] md:text-xs text-gray-400 mt-0.5">{{ $sponsorCount }} sponsor(s)</p>
+                    @endif
+                </div>
+            </div>
+
+            <!-- Transferred to Committee -->
+            <div
+                class="group relative overflow-hidden rounded-xl md:rounded-2xl bg-white border border-blue-100 p-3 md:p-5 shadow-sm hover:shadow-lg transition-all duration-300">
+                <div
+                    class="absolute top-0 right-0 w-16 h-16 md:w-24 md:h-24 -mt-2 -mr-2 md:-mt-4 md:-mr-4 rounded-full bg-gradient-to-br from-blue-500/10 to-indigo-500/10 group-hover:scale-125 transition-transform duration-500">
+                </div>
+                <div class="relative">
+                    <div
+                        class="w-9 h-9 md:w-11 md:h-11 rounded-lg md:rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/25">
+                        <svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="text-[10px] md:text-xs font-medium text-gray-400 uppercase tracking-wider mt-3 md:mt-4">
+                        Transferred to Committee</p>
+                    <p class="text-base md:text-2xl font-bold text-gray-900 mt-1">
+                        ৳{{ number_format($transferredAmount, 0) }}
+                    </p>
+                    @if ($transferredCount > 0)
+                        <p class="text-[10px] md:text-xs text-blue-500 font-medium mt-0.5">{{ $transferredCount }}
+                            transfer(s)</p>
+                    @endif
+                </div>
+            </div>
+
+            <!-- Pending Transfer -->
+            <div
+                class="group relative overflow-hidden rounded-xl md:rounded-2xl bg-white border border-fuchsia-100 p-3 md:p-5 shadow-sm hover:shadow-lg transition-all duration-300">
+                <div
+                    class="absolute top-0 right-0 w-16 h-16 md:w-24 md:h-24 -mt-2 -mr-2 md:-mt-4 md:-mr-4 rounded-full bg-gradient-to-br from-fuchsia-500/10 to-pink-500/10 group-hover:scale-125 transition-transform duration-500">
+                </div>
+                <div class="relative">
+                    <div
+                        class="w-9 h-9 md:w-11 md:h-11 rounded-lg md:rounded-xl bg-gradient-to-br from-fuchsia-500 to-pink-600 flex items-center justify-center shadow-lg shadow-fuchsia-500/25">
+                        <svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="text-[10px] md:text-xs font-medium text-gray-400 uppercase tracking-wider mt-3 md:mt-4">
+                        Pending Transfer To Committee</p>
+                    <p class="text-base md:text-2xl font-bold text-gray-900 mt-1">
+                        ৳{{ number_format($pendingTransferAmount, 0) }}
+                    </p>
+                    @if ($pendingTransferCount > 0)
+                        <p class="text-[10px] md:text-xs text-fuchsia-500 font-medium mt-0.5">{{ $pendingTransferCount }}
+                            registration(s) waiting</p>
                     @endif
                 </div>
             </div>
@@ -422,6 +478,15 @@
                                                             class="w-1 md:w-1.5 h-1 md:h-1.5 rounded-full bg-amber-500 mr-1 md:mr-1.5 animate-pulse"></span>
                                                         <span class="hidden sm:inline">Pending</span>
                                                         <span class="sm:hidden">P</span>
+                                                    </span>
+                                                @endif
+
+                                                @if ($donation->is_transferred)
+                                                    <span
+                                                        class="inline-flex items-center px-2 md:px-2.5 py-0.5 md:py-1 rounded-lg text-[10px] md:text-xs font-medium bg-blue-50 text-blue-700"
+                                                        title="Transferred to Committee">
+                                                        <span class="hidden sm:inline">Transferred</span>
+                                                        <span class="sm:hidden">T</span>
                                                     </span>
                                                 @endif
 

@@ -24,6 +24,14 @@ class DashboardController extends Controller
         $sponsorAmount = Donation::where('status', 'verified')->where('type', 'sponsor')->sum('amount');
         $sponsorCount = Donation::where('status', 'verified')->where('type', 'sponsor')->count();
 
+        // Transferred Amount
+        $transferredAmount = Donation::where('is_transferred', true)->sum('amount');
+        $transferredCount = Donation::where('is_transferred', true)->count();
+
+        // Pending Transfer Amount
+        $pendingTransferAmount = Donation::where('status', 'verified')->where('is_transferred', false)->sum('amount');
+        $pendingTransferCount = Donation::where('status', 'verified')->where('is_transferred', false)->count();
+
         $recentDonations = Donation::with(['sentToPhone', 'jerseyDetail'])
             ->latest()
             ->take(10)
@@ -65,6 +73,10 @@ class DashboardController extends Controller
             'pendingDonations',
             'sponsorAmount',
             'sponsorCount',
+            'transferredAmount',
+            'transferredCount',
+            'pendingTransferAmount',
+            'pendingTransferCount',
             'recentDonations',
             'phoneAnalytics'
         ));

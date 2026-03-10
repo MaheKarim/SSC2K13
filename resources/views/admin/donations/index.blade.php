@@ -159,6 +159,14 @@
                                                     {{ ucfirst($donation->status) }}
                                                 </span>
 
+                                                @if ($donation->is_transferred)
+                                                    <span
+                                                        class="inline-flex items-center px-1.5 md:px-2.5 py-0.5 rounded-full text-[10px] md:text-xs font-medium bg-blue-100 text-blue-800"
+                                                        title="Transferred to Committee">
+                                                        Transferred
+                                                    </span>
+                                                @endif
+
                                                 @if ($donation->sms_sent)
                                                     <div
                                                         class="group relative flex items-center justify-center cursor-help">
@@ -207,6 +215,17 @@
                                                         <button type="submit"
                                                             class="text-green-600 hover:text-green-700 font-medium text-[10px] md:text-xs">
                                                             Verify
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                                @if ($donation->status === 'verified' && !$donation->is_transferred)
+                                                    <form action="{{ route('admin.registrations.transfer', $donation) }}"
+                                                        method="POST" class="inline"
+                                                        onsubmit="return confirm('Are you sure you want to mark this donation as transferred to the committee?');">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="text-purple-600 hover:text-purple-700 font-medium text-[10px] md:text-xs">
+                                                            Transfer
                                                         </button>
                                                     </form>
                                                 @endif
