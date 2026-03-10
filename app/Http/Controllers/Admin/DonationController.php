@@ -63,7 +63,7 @@ class DonationController extends Controller
             $jerseySize = $donation->jerseyDetail->size->size ?? 'N/A';
             $nameOnJersey = $donation->jerseyDetail->name_on_jersey ?? 'N/A';
             $numberOnJersey = $donation->jerseyDetail->number_on_jersey ?? 'N/A';
-            $message .= " আপনার Jersey Size: {$jerseySize} | Name: {$nameOnJersey} | Number: {$numberOnJersey} | Amount: {$amount}Tk";
+            $message .= " আপনার Jersey Size: {$jerseySize} | Name: {$nameOnJersey} | Number: {$numberOnJersey}";
         }
 
         $message .= "\n– Developed By Mahe Karim";
