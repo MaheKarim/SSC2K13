@@ -56,13 +56,14 @@ class DonationController extends Controller
 
         // Send SMS notification
         $smsService = new SmsService();
-        $message = "SSC-2013 Iftar Mehfil & NPL S9/'26 ইভেন্টে আপনার রেজিস্ট্রেশন ও পেমেন্ট সফল হয়েছে।";
+        $amount = $donation->amount + 0; // Removing any trailing decimal zeroes
+        $message = "SSC-2013 Iftar Mehfil & NPL S9/'26 ইভেন্টে আপনার রেজিস্ট্রেশন ও {$amount}Tk পেমেন্ট সফল হয়েছে।";
 
         if ($donation->jerseyDetail) {
             $jerseySize = $donation->jerseyDetail->size->size ?? 'N/A';
             $nameOnJersey = $donation->jerseyDetail->name_on_jersey ?? 'N/A';
             $numberOnJersey = $donation->jerseyDetail->number_on_jersey ?? 'N/A';
-            $message .= " আপনার Jersey Size: {$jerseySize} | Name: {$nameOnJersey} | Number: {$numberOnJersey}";
+            $message .= " আপনার Jersey Size: {$jerseySize} | Name: {$nameOnJersey} | Number: {$numberOnJersey} | Amount: {$amount}Tk";
         }
 
         $message .= "\n– Developed By Mahe Karim";
@@ -210,13 +211,14 @@ class DonationController extends Controller
         if ($validated['status'] === 'verified') {
             $donation->load('jerseyDetail.size');
             $smsService = new SmsService();
-            $message = "SSC-2013 Iftar Mehfil & NPL S9 (2026) ইভেন্টে আপনার রেজিস্ট্রেশন ও পেমেন্ট সফল হয়েছে।";
+            $amount = $donation->amount + 0; // Removing any trailing decimal zeroes
+            $message = "SSC-2013 Iftar Mehfil & NPL S9 (2026) ইভেন্টে আপনার রেজিস্ট্রেশন ও {$amount}Tk পেমেন্ট সফল হয়েছে।";
 
             if ($donation->jerseyDetail) {
                 $jerseySize = $donation->jerseyDetail->size->size ?? 'N/A';
                 $nameOnJersey = $donation->jerseyDetail->name_on_jersey ?? 'N/A';
                 $numberOnJersey = $donation->jerseyDetail->number_on_jersey ?? 'N/A';
-                $message .= " আপনার Jersey Size: {$jerseySize} | Name: {$nameOnJersey} | Number: {$numberOnJersey}";
+                $message .= " আপনার Jersey Size: {$jerseySize} | Name: {$nameOnJersey} | Number: {$numberOnJersey} | Amount: {$amount}Tk";
             }
 
             $message .= "\n– Mahe Karim";
