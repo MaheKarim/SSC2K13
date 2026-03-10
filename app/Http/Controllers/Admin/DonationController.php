@@ -52,12 +52,13 @@ class DonationController extends Controller
             $donation->id,
             "Verified registration #{$donation->id} by {$donation->name}"
         );
-        $donation->load('jerseyDetail.size');
+        $donation->load(['jerseyDetail.size', 'sentToPhone']);
 
         // Send SMS notification
         $smsService = new SmsService();
         $amount = $donation->amount + 0; // Removing any trailing decimal zeroes
-        $message = "SSC-2013 Iftar Mehfil & NPL S9/'26 ইভেন্টে আপনার রেজিস্ট্রেশন ও {$amount}Tk পেমেন্ট সফল হয়েছে।";
+        $sentToNumber = $donation->sentToPhone?->number ?? 'N/A';
+        $message = "SSC-2013 Iftar Mehfil & NPL S9/'26 ইভেন্টে আপনার রেজিস্ট্রেশন ও {$amount}TK BDT পেমেন্ট Sent To: {$sentToNumber} সফল হয়েছে।";
 
         if ($donation->jerseyDetail) {
             $jerseySize = $donation->jerseyDetail->size->size ?? 'N/A';
@@ -209,10 +210,11 @@ class DonationController extends Controller
 
         // Send SMS if status is verified
         if ($validated['status'] === 'verified') {
-            $donation->load('jerseyDetail.size');
+            $donation->load(['jerseyDetail.size', 'sentToPhone']);
             $smsService = new SmsService();
             $amount = $donation->amount + 0; // Removing any trailing decimal zeroes
-            $message = "SSC-2013 Iftar Mehfil & NPL S9 (2026) ইভেন্টে আপনার রেজিস্ট্রেশন ও {$amount}Tk পেমেন্ট সফল হয়েছে।";
+            $sentToNumber = $donation->sentToPhone?->number ?? 'N/A';
+            $message = "SSC-2013 Iftar Mehfil & NPL S9 (2026) ইভেন্টে আপনার রেজিস্ট্রেশন ও {$amount}TK BDT পেমেন্ট Sent To: {$sentToNumber} সফল হয়েছে।";
 
             if ($donation->jerseyDetail) {
                 $jerseySize = $donation->jerseyDetail->size->size ?? 'N/A';
