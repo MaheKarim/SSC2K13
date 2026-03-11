@@ -38,11 +38,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Registrations
         Route::get('/registrations', [AdminDonationController::class, 'index'])->name('registrations.index');
         Route::get('/registrations/create', [AdminDonationController::class, 'createManual'])->name('registrations.create');
+        Route::get('/registrations/export', [AdminDonationController::class, 'export'])->name('registrations.export');
         Route::post('/registrations', [AdminDonationController::class, 'storeManual'])->name('registrations.store');
         Route::get('/registrations/{donation}', [AdminDonationController::class, 'show'])->name('registrations.show');
         Route::post('/registrations/{donation}/verify', [AdminDonationController::class, 'verify'])->name('registrations.verify');
         Route::post('/registrations/{donation}/transfer', [AdminDonationController::class, 'markTransferred'])->name('registrations.transfer');
-        Route::get('/registrations/export', [AdminDonationController::class, 'export'])->name('registrations.export');
 
         // Phone Numbers
         Route::get('/phone-numbers', [PhoneNumberController::class, 'index'])->name('phone-numbers.index');
