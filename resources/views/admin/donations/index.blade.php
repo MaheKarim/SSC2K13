@@ -240,7 +240,7 @@
 
                 <!-- Pagination -->
                 <div class="mt-4 md:mt-6 px-4 md:px-0">
-                    {{ $donations->links() }}
+                    {{ $donations->appends(request()->query())->links() }}
                 </div>
             @else
                 <div class="text-center py-12 md:py-16 px-6">
