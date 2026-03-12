@@ -828,7 +828,9 @@
                         <!-- Participant Info -->
                         <h3
                             class="text-lg font-bold text-gray-800 text-center mb-3 line-clamp-1 relative z-10 w-full group-hover:text-primary-600 transition-colors">
-                            {{ $participant->name }} <span class="text-sm text-gray-500 font-medium ml-1">৳{{ number_format($participant->amount, 0) }}</span>
+                            {{ $participant->name }}
+                            <br> <span
+                                class="text-sm text-gray-500 font-medium ml-1">৳{{ number_format($participant->amount, 0) }}</span>
                         </h3>
 
                         <div
