@@ -114,7 +114,8 @@
                     </div>
                     <p class="text-[10px] md:text-xs font-medium text-gray-400 uppercase tracking-wider mt-3 md:mt-4">Jersey
                     </p>
-                    <p class="text-base md:text-2xl font-bold text-gray-900 mt-1">৳{{ number_format($jerseyAmount, 0) }}</p>
+                    <p class="text-base md:text-2xl font-bold text-gray-900 mt-1">{{ $jerseyCount }}</p>
+                    <p class="text-[10px] md:text-xs text-gray-400 mt-0.5">৳{{ number_format($jerseyAmount, 0) }}</p>
                 </div>
             </div>
 

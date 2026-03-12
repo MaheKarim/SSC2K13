@@ -16,6 +16,7 @@ class DashboardController extends Controller
         $totalAmount = Donation::where('status', 'verified')->sum('amount');
         $iftarAmount = Donation::where('status', 'verified')->where('donation_type', 'iftar')->sum('amount');
         $jerseyAmount = Donation::where('status', 'verified')->where('donation_type', 'jersey')->sum('amount');
+        $jerseyCount = Donation::where('status', 'verified')->where('donation_type', 'jersey')->count();
         $bothAmount = Donation::where('status', 'verified')->where('donation_type', 'both')->sum('amount');
         $bothCount = Donation::where('status', 'verified')->where('donation_type', 'both')->count();
         $pendingDonations = Donation::where('status', 'pending')->count();
@@ -68,6 +69,7 @@ class DashboardController extends Controller
             'totalAmount',
             'iftarAmount',
             'jerseyAmount',
+            'jerseyCount',
             'bothAmount',
             'bothCount',
             'pendingDonations',
