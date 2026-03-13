@@ -34,9 +34,11 @@ class DashboardController extends Controller
         $pendingTransferCount = Donation::where('status', 'verified')->where('is_transferred', false)->count();
 
         $recentDonations = Donation::with(['sentToPhone', 'jerseyDetail'])
+            ->where('status', 'pending')
             ->latest()
             ->take(10)
             ->get();
+
 
         // Phone analytics with detailed breakdown
         $phoneAnalytics = \Illuminate\Support\Facades\DB::table('donations')
