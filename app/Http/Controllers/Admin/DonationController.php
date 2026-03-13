@@ -85,7 +85,26 @@ class DonationController extends Controller
 
     public function verify(Donation $donation)
     {
-        $donation->update(['status' => 'verified']);
+        // Auto-set payment to full when verified (if not already partially/fully paid)
+        $paymentUpdates = ['status' => 'verified'];
+        if ($donation->payment_status !== 'partial_paid' && $donation->payment_status !== 'paid_in_full') {
+            $paymentUpdates['paid_amount']    = $donation->amount;
+            $paymentUpdates['due_amount']     = 0;
+            $paymentUpdates['payment_status'] = 'paid_in_full';
+        } elseif ($donation->payment_status === 'partial_paid') {
+            // Keep partial — admin will manually record remaining
+        }
+
+        $donation->update($paymentUpdates);
+
+        // Create payment history if becoming fully paid now
+        if (!$donation->wasRecentlyCreated && isset($paymentUpdates['paid_amount'])) {
+            $donation->paymentHistories()->create([
+                'amount'         => $donation->amount,
+                'payment_method' => 'other',
+                'notes'          => 'Marked as paid on verification',
+            ]);
+        }
 
         AdminActivity::log(
             'verified',

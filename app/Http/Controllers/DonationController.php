@@ -17,8 +17,8 @@ class DonationController extends Controller
         $jerseySizes = JerseySize::where('active', true)->get();
         $iftarDate = SiteSetting::get('iftar_date');
         $registrationDeadline = SiteSetting::get('registration_deadline');
-        $iftarFormEnabled = SiteSetting::get('iftar_form_enabled', '1') === '1';
-        $jerseyFormEnabled = SiteSetting::get('jersey_form_enabled', '1') === '1';
+        $iftarFormEnabled = in_array(SiteSetting::get('iftar_form_enabled', '1'), ['1', 1, true, 'true'], true);
+        $jerseyFormEnabled = in_array(SiteSetting::get('jersey_form_enabled', '1'), ['1', 1, true, 'true'], true);
         $verifiedParticipants = Donation::where('status', 'verified')->count();
         $verifiedList = Donation::where('status', 'verified')->latest()->get();
 
@@ -36,8 +36,8 @@ class DonationController extends Controller
             return back()->with('error', 'Registration for this event is now closed.');
         }
 
-        $iftarFormEnabled = SiteSetting::get('iftar_form_enabled', '1') === '1';
-        $jerseyFormEnabled = SiteSetting::get('jersey_form_enabled', '1') === '1';
+        $iftarFormEnabled = in_array(SiteSetting::get('iftar_form_enabled', '1'), ['1', 1, true, 'true'], true);
+        $jerseyFormEnabled = in_array(SiteSetting::get('jersey_form_enabled', '1'), ['1', 1, true, 'true'], true);
         $type = $request->input('donation_type');
         if (($type === 'iftar' && !$iftarFormEnabled) ||
         ($type === 'jersey' && !$jerseyFormEnabled) ||
@@ -49,8 +49,6 @@ class DonationController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:20'],
             'donation_type' => ['required', 'in:iftar,jersey,both'],
-            'payment_type' => ['required', 'in:full_upfront,partial_upfront'],
-            'partial_amount' => ['nullable', 'required_if:payment_type,partial_upfront', 'numeric', 'min:1'],
             'sent_from' => ['required', 'string', 'max:20'],
             'sent_to_phone_id' => ['required', 'exists:phone_numbers,id'],
             'transaction_id' => ['nullable', 'required_without:screenshot', 'string', 'max:100'],
@@ -61,22 +59,9 @@ class DonationController extends Controller
         ], [
             'transaction_id.required_without' => 'Please provide a Transaction ID or upload a screenshot.',
             'screenshot.required_without' => 'Please upload a screenshot or provide a Transaction ID.',
-            'partial_amount.required_if' => 'Please enter the partial payment amount.',
         ]);
 
         $amount = $this->calculateAmount($validated['donation_type']);
-
-        // Calculate paid amount and payment status based on payment type
-        $isPartial = $validated['payment_type'] === 'partial_upfront';
-        $paidAmount = $isPartial ? (float)$validated['partial_amount'] : $amount;
-        $dueAmount = $amount - $paidAmount;
-
-        // Validate partial amount doesn't exceed total
-        if ($isPartial && $paidAmount >= $amount) {
-            return back()->with('error', 'Partial payment amount must be less than total amount.')->withInput();
-        }
-
-        $paymentStatus = $paidAmount >= $amount ? 'paid_in_full' : ($paidAmount > 0 ? 'partial_paid' : 'unpaid');
 
         $screenshotPath = null;
         if ($request->hasFile('screenshot')) {
@@ -84,27 +69,19 @@ class DonationController extends Controller
         }
 
         $donation = Donation::create([
-            'name' => $validated['name'],
-            'phone' => $validated['phone'],
-            'donation_type' => $validated['donation_type'],
-            'amount' => $amount,
-            'paid_amount' => $paidAmount,
-            'due_amount' => $dueAmount,
-            'payment_status' => $paymentStatus,
-            'payment_type' => $validated['payment_type'],
-            'sent_from' => $validated['sent_from'],
-            'sent_to_phone_id' => $validated['sent_to_phone_id'],
-            'transaction_id' => $validated['transaction_id'] ?? null,
-            'screenshot' => $screenshotPath,
-            'status' => 'pending',
-        ]);
-
-        // Create payment history record
-        $donation->paymentHistories()->create([
-            'amount' => $paidAmount,
-            'payment_method' => 'other',
-            'transaction_id' => $validated['transaction_id'] ?? null,
-            'notes' => $isPartial ? 'Partial upfront payment' : 'Full upfront payment',
+            'name'              => $validated['name'],
+            'phone'             => $validated['phone'],
+            'donation_type'     => $validated['donation_type'],
+            'amount'            => $amount,
+            'paid_amount'       => 0,
+            'due_amount'        => $amount,
+            'payment_status'    => 'unpaid',
+            'payment_type'      => 'full_upfront',
+            'sent_from'         => $validated['sent_from'],
+            'sent_to_phone_id'  => $validated['sent_to_phone_id'],
+            'transaction_id'    => $validated['transaction_id'] ?? null,
+            'screenshot'        => $screenshotPath,
+            'status'            => 'pending',
         ]);
 
         if (in_array($validated['donation_type'], ['jersey', 'both'])) {
