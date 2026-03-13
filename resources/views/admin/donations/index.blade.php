@@ -82,6 +82,15 @@
                                         Amount</th>
                                     <th
                                         class="text-left py-2.5 md:py-3 px-2 md:px-4 text-[10px] md:text-sm font-medium text-gray-600">
+                                        Paid</th>
+                                    <th
+                                        class="text-left py-2.5 md:py-3 px-2 md:px-4 text-[10px] md:text-sm font-medium text-gray-600">
+                                        Due</th>
+                                    <th
+                                        class="text-left py-2.5 md:py-3 px-2 md:px-4 text-[10px] md:text-sm font-medium text-gray-600">
+                                        Payment</th>
+                                    <th
+                                        class="text-left py-2.5 md:py-3 px-2 md:px-4 text-[10px] md:text-sm font-medium text-gray-600">
                                         Collected By</th>
                                     <th
                                         class="text-left py-2.5 md:py-3 px-2 md:px-4 text-[10px] md:text-sm font-medium text-gray-600">
@@ -128,6 +137,31 @@
                                         <td
                                             class="py-2.5 md:py-3 px-2 md:px-4 text-xs md:text-sm font-semibold text-gray-800">
                                             ৳{{ number_format($donation->amount, 0) }}
+                                        </td>
+                                        <td
+                                            class="py-2.5 md:py-3 px-2 md:px-4 text-xs md:text-sm font-medium text-green-600">
+                                            ৳{{ number_format($donation->paid_amount, 0) }}
+                                        </td>
+                                        <td class="py-2.5 md:py-3 px-2 md:px-4 text-xs md:text-sm">
+                                            @if ($donation->due_amount > 0)
+                                                <span
+                                                    class="font-semibold text-red-600">৳{{ number_format($donation->due_amount, 0) }}</span>
+                                            @else
+                                                <span class="text-gray-400">-</span>
+                                            @endif
+                                        </td>
+                                        <td class="py-2.5 md:py-3 px-2 md:px-4 text-xs md:text-sm">
+                                            <span
+                                                class="inline-flex items-center px-1.5 md:px-2.5 py-0.5 rounded-full text-[10px] md:text-xs font-medium
+                                                @if ($donation->payment_status === 'paid_in_full') bg-green-100 text-green-800
+                                                @elseif($donation->payment_status === 'partial_paid') bg-amber-100 text-amber-800
+                                                @else bg-red-100 text-red-800 @endif">
+                                                {{ $donation->payment_status_label }}
+                                            </span>
+                                            @if ($donation->payment_type === 'partial_upfront')
+                                                <span
+                                                    class="block text-[9px] md:text-[10px] text-gray-500 mt-0.5">Partial</span>
+                                            @endif
                                         </td>
                                         <td class="py-2.5 md:py-3 px-2 md:px-4 text-xs md:text-sm">
                                             @if ($donation->collect_by)

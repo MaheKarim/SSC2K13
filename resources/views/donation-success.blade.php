@@ -66,8 +66,29 @@
                     </div>
 
                     <div class="flex justify-between items-center py-2 border-b border-gray-200">
-                        <span class="text-gray-600">Amount</span>
-                        <span class="font-bold text-green-600 text-xl">৳{{ number_format($donation->amount, 2) }}</span>
+                        <span class="text-gray-600">Total Amount</span>
+                        <span class="font-bold text-gray-800 text-xl">৳{{ number_format($donation->amount, 2) }}</span>
+                    </div>
+
+                    <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                        <span class="text-gray-600">Paid Amount</span>
+                        <span class="font-bold text-green-600">৳{{ number_format($donation->paid_amount, 2) }}</span>
+                    </div>
+
+                    @if ($donation->due_amount > 0)
+                        <div
+                            class="flex justify-between items-center py-2 border-b border-gray-200 bg-amber-50 -mx-2 px-2 rounded">
+                            <span class="text-amber-700 font-medium">Due Amount</span>
+                            <span class="font-bold text-amber-600">৳{{ number_format($donation->due_amount, 2) }}</span>
+                        </div>
+                    @endif
+
+                    <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                        <span class="text-gray-600">Payment Type</span>
+                        <span
+                            class="font-semibold {{ $donation->payment_type === 'partial_upfront' ? 'text-amber-600' : 'text-green-600' }}">
+                            {{ $donation->payment_type_label }}
+                        </span>
                     </div>
 
                     <div class="flex justify-between items-center py-2 border-b border-gray-200">
@@ -131,6 +152,12 @@
                         <p class="text-sm text-yellow-700 mt-1">
                             Your donation is being verified. We'll confirm once the payment is received.
                         </p>
+                        @if ($donation->due_amount > 0)
+                            <p class="text-sm text-amber-700 mt-2 font-medium">
+                                ⚠️ Please note: You have ৳{{ number_format($donation->due_amount, 2) }} due. Please
+                                complete your payment before the event.
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>

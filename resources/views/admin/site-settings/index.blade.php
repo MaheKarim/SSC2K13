@@ -44,6 +44,41 @@
                     <button type="submit" class="mobile-btn btn-primary w-full sm:w-auto">
                         Save Settings
                     </button>
+
+                    {{-- Registration Form Toggles --}}
+                    <div class="pt-4 md:pt-6 border-t border-gray-100">
+                        <h4 class="text-sm md:text-base font-semibold text-gray-700 mb-4">Registration Form Options</h4>
+                        <div class="space-y-4">
+                            {{-- Iftar Toggle --}}
+                            <label class="flex items-center justify-between gap-4 p-4 rounded-xl border border-gray-100 bg-gray-50 cursor-pointer group hover:border-primary-200 transition-colors">
+                                <div>
+                                    <p class="font-medium text-gray-800 text-sm">🌙 ইফতার ফর্ম সক্রিয়</p>
+                                    <p class="text-xs text-gray-500 mt-0.5">বন্ধ করলে পাবলিক ফর্মে ইফতার অপশন দেখা যাবে না</p>
+                                </div>
+                                <div class="relative shrink-0">
+                                    <input type="checkbox" name="iftar_form_enabled" id="iftar_form_enabled" class="sr-only peer" value="1"
+                                        {{ $iftarFormEnabled === '1' ? 'checked' : '' }}>
+                                    <div class="w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-primary-600 transition-colors duration-200"></div>
+                                    <div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200 peer-checked:translate-x-5"></div>
+                                </div>
+                            </label>
+
+                            {{-- Jersey Toggle --}}
+                            <label class="flex items-center justify-between gap-4 p-4 rounded-xl border border-gray-100 bg-gray-50 cursor-pointer group hover:border-primary-200 transition-colors">
+                                <div>
+                                    <p class="font-medium text-gray-800 text-sm">👕 জার্সি ফর্ম সক্রিয়</p>
+                                    <p class="text-xs text-gray-500 mt-0.5">বন্ধ করলে পাবলিক ফর্মে জার্সি অপশন দেখা যাবে না</p>
+                                </div>
+                                <div class="relative shrink-0">
+                                    <input type="checkbox" name="jersey_form_enabled" id="jersey_form_enabled" class="sr-only peer" value="1"
+                                        {{ $jerseyFormEnabled === '1' ? 'checked' : '' }}>
+                                    <div class="w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-primary-600 transition-colors duration-200"></div>
+                                    <div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200 peer-checked:translate-x-5"></div>
+                                </div>
+                            </label>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-3">উভয় বন্ধ থাকলে পুরো রেজিস্ট্রেশন ফর্ম লুকিয়ে যাবে।</p>
+                    </div>
                 </div>
             </form>
         </div>

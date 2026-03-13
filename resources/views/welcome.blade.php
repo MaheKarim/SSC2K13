@@ -488,6 +488,21 @@
                             <p class="text-gray-600 max-w-md mx-auto">নির্ধারিত সময় পার হয়ে যাওয়ায় বর্তমানে নতুন
                                 রেজিস্ট্রেশন গ্রহণ করা হচ্ছে না। যেকোনো প্রয়োজনে আয়োজকদের সাথে যোগাযোগ করুন।</p>
                         </div>
+                    @elseif (!$iftarFormEnabled && !$jerseyFormEnabled)
+                        <div class="text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+                            <div
+                                class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">রেজিস্ট্রেশন বর্তমানে উপলব্ধ নেই</h3>
+                            <p class="text-gray-600 max-w-md mx-auto">বর্তমানে নতুন রেজিস্ট্রেশন গ্রহণ করা হচ্ছে না।
+                                শীঘ্রই আবার চালু হবে। যেকোনো প্রয়োজনে আয়োজকদের সাথে যোগাযোগ করুন।</p>
+                        </div>
                     @else
                         <form action="{{ route('donation.submit') }}" method="POST" id="donationForm"
                             enctype="multipart/form-data">
@@ -549,47 +564,53 @@
                                     value="{{ old('donation_type', '') }}" required>
 
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                                    <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
-                                        data-type="iftar" data-amount="250" onclick="selectDonation(this)">
-                                        <div class="text-2xl mb-2">🌙</div>
-                                        <div class="font-semibold text-gray-800">শুধুমাত্র ইফতার</div>
-                                        <div class="text-primary-600 font-bold">৳250</div>
-                                        <div class="check-icon hidden mt-2">
-                                            <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
-                                                stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2.5" d="M5 13l4 4L19 7"></path>
-                                            </svg>
+                                    @if ($iftarFormEnabled)
+                                        <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
+                                            data-type="iftar" data-amount="250" onclick="selectDonation(this)">
+                                            <div class="text-2xl mb-2">🌙</div>
+                                            <div class="font-semibold text-gray-800">শুধুমাত্র ইফতার</div>
+                                            <div class="text-primary-600 font-bold">৳250</div>
+                                            <div class="check-icon hidden mt-2">
+                                                <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
 
-                                    <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
-                                        data-type="jersey" data-amount="250" onclick="selectDonation(this)">
-                                        <div class="text-2xl mb-2">👕</div>
-                                        <div class="font-semibold text-gray-800">শুধুমাত্র জার্সি</div>
-                                        <div class="text-primary-600 font-bold">৳250</div>
-                                        <div class="check-icon hidden mt-2">
-                                            <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
-                                                stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2.5" d="M5 13l4 4L19 7"></path>
-                                            </svg>
+                                    @if ($jerseyFormEnabled)
+                                        <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
+                                            data-type="jersey" data-amount="250" onclick="selectDonation(this)">
+                                            <div class="text-2xl mb-2">👕</div>
+                                            <div class="font-semibold text-gray-800">শুধুমাত্র জার্সি</div>
+                                            <div class="text-primary-600 font-bold">৳250</div>
+                                            <div class="check-icon hidden mt-2">
+                                                <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
 
-                                    <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
-                                        data-type="both" data-amount="500" onclick="selectDonation(this)">
-                                        <div class="text-2xl mb-2">⭐</div>
-                                        <div class="font-semibold text-gray-800">ইফতার + জার্সি</div>
-                                        <div class="text-gold-600 font-bold">৳500</div>
-                                        <div class="check-icon hidden mt-2">
-                                            <svg class="w-6 h-6 mx-auto text-gold-600" fill="none"
-                                                stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2.5" d="M5 13l4 4L19 7"></path>
-                                            </svg>
+                                    @if ($iftarFormEnabled && $jerseyFormEnabled)
+                                        <div class="donation-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
+                                            data-type="both" data-amount="500" onclick="selectDonation(this)">
+                                            <div class="text-2xl mb-2">⭐</div>
+                                            <div class="font-semibold text-gray-800">ইফতার + জার্সি</div>
+                                            <div class="text-gold-600 font-bold">৳500</div>
+                                            <div class="check-icon hidden mt-2">
+                                                <svg class="w-6 h-6 mx-auto text-gold-600" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 </div>
 
                                 @error('donation_type')
@@ -600,6 +621,78 @@
                                 <div class="bg-gray-100 rounded-lg p-4 text-center">
                                     <span class="text-gray-600">মোট পরিমাণ: </span>
                                     <span id="totalAmount" class="text-2xl font-bold text-primary-600">৳0</span>
+                                </div>
+                            </div>
+
+                            <!-- Payment Type Selection (Full vs Partial) -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        </path>
+                                    </svg>
+                                    পেমেন্টের ধরন নির্বাচন করুন
+                                </h3>
+
+                                <input type="hidden" name="payment_type" id="paymentType"
+                                    value="{{ old('payment_type', 'full_upfront') }}">
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div class="payment-type-card cursor-pointer border-2 border-primary-500 bg-primary-50 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
+                                        data-type="full_upfront" onclick="selectPaymentType(this)">
+                                        <div class="text-2xl mb-2">💰</div>
+                                        <div class="font-semibold text-gray-800">সম্পূর্ণ পেমেন্ট</div>
+                                        <div class="text-sm text-gray-500 mt-1">একসাথে সম্পূর্ণ টাকা পরিশোধ</div>
+                                        <div class="check-icon mt-2">
+                                            <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div class="payment-type-card cursor-pointer border-2 border-gray-200 rounded-xl p-4 text-center transition duration-200 hover:shadow-md"
+                                        data-type="partial_upfront" onclick="selectPaymentType(this)">
+                                        <div class="text-2xl mb-2">⏳</div>
+                                        <div class="font-semibold text-gray-800">আংশিক পেমেন্ট</div>
+                                        <div class="text-sm text-gray-500 mt-1">এখন কিছু টাকা, বাকি পরে দিবেন</div>
+                                        <div class="check-icon hidden mt-2">
+                                            <svg class="w-6 h-6 mx-auto text-primary-600" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Partial Payment Amount Field -->
+                                <div id="partialPaymentSection"
+                                    class="hidden bg-amber-50 border border-amber-200 rounded-lg p-4">
+                                    <label for="partial_amount" class="label text-amber-800">আপনি কত টাকা পাঠাচ্ছেন
+                                        এখন? <span class="text-red-500">*</span></label>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-gray-600 font-bold">৳</span>
+                                        <input type="number" id="partial_amount" name="partial_amount"
+                                            value="{{ old('partial_amount') }}"
+                                            class="input-field @error('partial_amount') border-red-500 @enderror"
+                                            placeholder="যেমন: 100" min="1" step="any">
+                                    </div>
+                                    <p class="text-xs text-amber-600 mt-2">
+                                        <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        বাকি টাকা পরে পরিশোধ করতে হবে। রেজিস্ট্রেশন সম্পূর্ণ করতে হলে পূর্ণাঙ্গ পেমেন্ট
+                                        প্রয়োজন।
+                                    </p>
+                                    @error('partial_amount')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -970,6 +1063,38 @@
         const jerseyFields = ['jersey_size_id', 'name_on_jersey', 'number_on_jersey'];
         const allCards = document.querySelectorAll('.donation-card');
 
+        // Payment Type Selection
+        const paymentTypeInput = document.getElementById('paymentType');
+        const partialPaymentSection = document.getElementById('partialPaymentSection');
+        const partialAmountInput = document.getElementById('partial_amount');
+        const allPaymentTypeCards = document.querySelectorAll('.payment-type-card');
+
+        function selectPaymentType(card) {
+            const type = card.dataset.type;
+
+            // Deselect all cards first
+            allPaymentTypeCards.forEach(c => {
+                c.classList.remove('border-primary-500', 'bg-primary-50', 'shadow-md');
+                c.classList.add('border-gray-200');
+                c.querySelector('.check-icon').classList.add('hidden');
+            });
+
+            // Select the clicked card
+            paymentTypeInput.value = type;
+            card.classList.remove('border-gray-200');
+            card.classList.add('border-primary-500', 'bg-primary-50', 'shadow-md');
+            card.querySelector('.check-icon').classList.remove('hidden');
+
+            // Toggle partial payment section
+            if (type === 'partial_upfront') {
+                partialPaymentSection.classList.remove('hidden');
+                partialAmountInput.setAttribute('required', 'required');
+            } else {
+                partialPaymentSection.classList.add('hidden');
+                partialAmountInput.removeAttribute('required');
+            }
+        }
+
         function selectDonation(card) {
             const type = card.dataset.type;
             const amount = card.dataset.amount;
@@ -1031,12 +1156,34 @@
             }
         }
 
-        // Form validation: ensure donation_type is selected before submit
+        // Form validation: ensure donation_type and payment validation before submit
         document.getElementById('donationForm').addEventListener('submit', function(e) {
             if (!donationTypeInput.value) {
                 e.preventDefault();
                 alert('দয়া করে একটি অপশন নির্বাচন করুন।');
                 return false;
+            }
+
+            // Validate partial payment amount
+            if (paymentTypeInput.value === 'partial_upfront') {
+                const partialAmount = parseFloat(partialAmountInput.value);
+                const totalAmount = parseFloat(document.querySelector(
+                        '.donation-card.border-primary-500, .donation-card.border-gold-500')?.dataset.amount ||
+                    0);
+
+                if (!partialAmount || partialAmount <= 0) {
+                    e.preventDefault();
+                    alert('আংশিক পেমেন্টের জন্য একটি বৈধ পরিমাণ লিখুন।');
+                    return false;
+                }
+
+                if (partialAmount >= totalAmount) {
+                    e.preventDefault();
+                    alert(
+                        `আংশিক পেমেন্টের পরিমাণ মোট পরিমাণ (৳${totalAmount}) থেকে কম হতে হবে। সম্পূর্ণ পেমেন্ট করতে চাইলে "সম্পূর্ণ পেমেন্ট" বিকল্পটি নির্বাচন করুন।`
+                        );
+                    return false;
+                }
             }
         });
 
@@ -1047,6 +1194,16 @@
                 allCards.forEach(card => {
                     if (card.dataset.type === savedType) {
                         selectDonation(card);
+                    }
+                });
+            }
+
+            // Restore payment type selection
+            const savedPaymentType = paymentTypeInput.value;
+            if (savedPaymentType) {
+                allPaymentTypeCards.forEach(card => {
+                    if (card.dataset.type === savedPaymentType) {
+                        selectPaymentType(card);
                     }
                 });
             }

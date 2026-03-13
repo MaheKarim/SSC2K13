@@ -129,6 +129,39 @@
                 <div class="space-y-3 md:space-y-4">
                     <h4 class="font-semibold text-gray-700 border-b pb-2 text-sm md:text-base">Payment Information</h4>
 
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs md:text-sm text-gray-500">Total Amount</p>
+                            <p class="font-medium text-gray-800 text-lg">৳{{ number_format($donation->amount, 2) }}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs md:text-sm text-gray-500">Paid Amount</p>
+                            <p class="font-medium text-green-600 text-lg">৳{{ number_format($donation->paid_amount, 2) }}
+                            </p>
+                        </div>
+                    </div>
+
+                    @if ($donation->due_amount > 0)
+                        <div class="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                            <p class="text-xs md:text-sm text-amber-700">Due Amount</p>
+                            <p class="font-bold text-amber-600 text-xl">৳{{ number_format($donation->due_amount, 2) }}</p>
+                        </div>
+                    @endif
+
+                    <div>
+                        <p class="text-xs md:text-sm text-gray-500">Payment Status</p>
+                        <span
+                            class="inline-flex items-center px-2.5 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium mt-1
+                            @if ($donation->payment_status === 'paid_in_full') bg-green-100 text-green-800
+                            @elseif($donation->payment_status === 'partial_paid') bg-amber-100 text-amber-800
+                            @else bg-red-100 text-red-800 @endif">
+                            {{ $donation->payment_status_label }}
+                        </span>
+                        @if ($donation->payment_type === 'partial_upfront')
+                            <span class="block text-xs text-gray-500 mt-1">(Partial Payment Plan)</span>
+                        @endif
+                    </div>
+
                     <div>
                         <p class="text-xs md:text-sm text-gray-500">Sent From</p>
                         <p class="font-medium text-gray-800 text-sm md:text-base">{{ $donation->sent_from }}</p>
@@ -143,54 +176,152 @@
                 </div>
             </div>
 
-            <!-- Jersey Details -->
-            @if ($donation->jerseyDetail)
+            <!-- Payment History -->
+            @if ($donation->paymentHistories->count() > 0)
                 <div class="mt-4 md:mt-6 pt-4 md:pt-6 border-t mx-4 md:mx-6">
-                    <h4 class="font-semibold text-gray-700 mb-3 md:mb-4 text-sm md:text-base">Jersey Details</h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
-                        <div>
-                            <p class="text-xs md:text-sm text-gray-500">Size</p>
-                            <p class="font-medium text-gray-800 text-sm md:text-base">
-                                {{ $donation->jerseyDetail->size?->size ?? 'N/A' }}</p>
-                        </div>
-                        <div>
-                            <p class="text-xs md:text-sm text-gray-500">Name on Jersey</p>
-                            <p class="font-medium text-gray-800 text-sm md:text-base">
-                                {{ $donation->jerseyDetail->name_on_jersey }}</p>
-                        </div>
-                        <div>
-                            <p class="text-xs md:text-sm text-gray-500">Number on Jersey</p>
-                            <p class="font-medium text-gray-800 text-sm md:text-base">
-                                {{ $donation->jerseyDetail->number_on_jersey }}</p>
-                        </div>
+                    <h4 class="font-semibold text-gray-700 mb-3 md:mb-4 text-sm md:text-base">Payment History</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="text-left py-2 px-3 text-xs font-medium text-gray-500">Date</th>
+                                    <th class="text-left py-2 px-3 text-xs font-medium text-gray-500">Amount</th>
+                                    <th class="text-left py-2 px-3 text-xs font-medium text-gray-500">Method</th>
+                                    <th class="text-left py-2 px-3 text-xs font-medium text-gray-500">Transaction ID</th>
+                                    <th class="text-left py-2 px-3 text-xs font-medium text-gray-500">Collected By</th>
+                                    <th class="text-left py-2 px-3 text-xs font-medium text-gray-500">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($donation->paymentHistories as $payment)
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-2 px-3 text-xs text-gray-600">
+                                            {{ $payment->created_at->format('M d, Y') }}</td>
+                                        <td class="py-2 px-3 text-xs font-semibold text-green-600">
+                                            ৳{{ number_format($payment->amount, 2) }}</td>
+                                        <td class="py-2 px-3 text-xs text-gray-600 capitalize">
+                                            {{ $payment->payment_method }}</td>
+                                        <td class="py-2 px-3 text-xs text-gray-600 font-mono">
+                                            {{ $payment->transaction_id ?? '-' }}</td>
+                                        <td class="py-2 px-3 text-xs text-gray-600">
+                                            {{ $payment->collected_by ?? ($payment->admin?->name ?? 'System') }}</td>
+                                        <td class="py-2 px-3 text-xs text-gray-500">{{ $payment->notes ?? '-' }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             @endif
 
-            <!-- Actions -->
-            <div
-                class="mt-4 md:mt-6 pt-4 md:pt-6 border-t flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2 md:space-x-3 p-4 md:p-6 pt-0">
-                @if ($donation->status === 'pending')
-                    <form action="{{ route('admin.registrations.verify', $donation) }}" method="POST"
-                        class="w-full sm:w-auto">
+            <!-- Record Additional Payment -->
+            @if ($donation->due_amount > 0)
+                <div class="mt-4 md:mt-6 pt-4 md:pt-6 border-t mx-4 md:mx-6">
+                    <h4 class="font-semibold text-gray-700 mb-3 md:mb-4 text-sm md:text-base">Record Additional Payment</h4>
+                    <form action="{{ route('admin.registrations.payment', $donation) }}" method="POST"
+                        class="bg-gray-50 rounded-lg p-4">
                         @csrf
-                        <button type="submit" class="mobile-btn btn-primary w-full">
-                            Verify Registration
-                        </button>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1">Amount (Max:
+                                    ৳{{ number_format($donation->due_amount, 2) }})</label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-2 text-gray-500">৳</span>
+                                    <input type="number" name="amount" step="0.01"
+                                        max="{{ $donation->due_amount }}" required
+                                        class="w-full pl-7 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                                        placeholder="0.00">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1">Payment Method</label>
+                                <select name="payment_method" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                    <option value="cash">Cash</option>
+                                    <option value="bkash">bKash</option>
+                                    <option value="nagad">Nagad</option>
+                                    <option value="rocket">Rocket</option>
+                                    <option value="bank_transfer">Bank Transfer</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1">Transaction ID
+                                    (Optional)</label>
+                                <input type="text" name="transaction_id"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                                    placeholder="e.g., TRX123456">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1">Notes (Optional)</label>
+                                <input type="text" name="notes"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                                    placeholder="Any notes...">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="submit" class="btn-primary text-sm">
+                                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                Record Payment
+                            </button>
+                        </div>
                     </form>
-                @endif
-                @if ($donation->status === 'verified' && !$donation->is_transferred)
-                    <form action="{{ route('admin.registrations.transfer', $donation) }}" method="POST"
-                        class="w-full sm:w-auto"
-                        onsubmit="return confirm('Are you sure you want to mark this donation as transferred to the committee?');">
-                        @csrf
-                        <button type="submit"
-                            class="mobile-btn w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors border border-transparent flex items-center justify-center">
-                            Mark as Transferred
-                        </button>
-                    </form>
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
+
+        <!-- Jersey Details -->
+        @if ($donation->jerseyDetail)
+            <div class="mt-4 md:mt-6 pt-4 md:pt-6 border-t mx-4 md:mx-6">
+                <h4 class="font-semibold text-gray-700 mb-3 md:mb-4 text-sm md:text-base">Jersey Details</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+                    <div>
+                        <p class="text-xs md:text-sm text-gray-500">Size</p>
+                        <p class="font-medium text-gray-800 text-sm md:text-base">
+                            {{ $donation->jerseyDetail->size?->size ?? 'N/A' }}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs md:text-sm text-gray-500">Name on Jersey</p>
+                        <p class="font-medium text-gray-800 text-sm md:text-base">
+                            {{ $donation->jerseyDetail->name_on_jersey }}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs md:text-sm text-gray-500">Number on Jersey</p>
+                        <p class="font-medium text-gray-800 text-sm md:text-base">
+                            {{ $donation->jerseyDetail->number_on_jersey }}</p>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <!-- Actions -->
+        <div
+            class="mt-4 md:mt-6 pt-4 md:pt-6 border-t flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2 md:space-x-3 p-4 md:p-6 pt-0">
+            @if ($donation->status === 'pending')
+                <form action="{{ route('admin.registrations.verify', $donation) }}" method="POST"
+                    class="w-full sm:w-auto">
+                    @csrf
+                    <button type="submit" class="mobile-btn btn-primary w-full">
+                        Verify Registration
+                    </button>
+                </form>
+            @endif
+            @if ($donation->status === 'verified' && !$donation->is_transferred)
+                <form action="{{ route('admin.registrations.transfer', $donation) }}" method="POST"
+                    class="w-full sm:w-auto"
+                    onsubmit="return confirm('Are you sure you want to mark this donation as transferred to the committee?');">
+                    @csrf
+                    <button type="submit"
+                        class="mobile-btn w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-colors border border-transparent flex items-center justify-center">
+                        Mark as Transferred
+                    </button>
+                </form>
+            @endif
+        </div>
+    </div>
     </div>
 @endsection

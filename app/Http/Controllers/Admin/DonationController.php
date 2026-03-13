@@ -38,8 +38,49 @@ class DonationController extends Controller
 
     public function show(Donation $donation)
     {
-        $donation->load(['sentToPhone', 'jerseyDetail.size']);
+        $donation->load(['sentToPhone', 'jerseyDetail.size', 'paymentHistories.admin']);
         return view('admin.donations.show', compact('donation'));
+    }
+
+    /**
+     * Record an additional payment for a donation
+     */
+    public function recordPayment(Request $request, Donation $donation)
+    {
+        $validated = $request->validate([
+            'amount' => ['required', 'numeric', 'min:0.01', 'max:' . $donation->due_amount],
+            'payment_method' => ['required', 'in:cash,bkash,nagad,rocket,bank_transfer,other'],
+            'transaction_id' => ['nullable', 'string', 'max:255'],
+            'notes' => ['nullable', 'string', 'max:500'],
+        ]);
+
+        // Add the payment
+        $payment = $donation->addPayment(
+            amount: $validated['amount'],
+            paymentMethod: $validated['payment_method'],
+            transactionId: $validated['transaction_id'] ?? null,
+            notes: $validated['notes'] ?? null,
+            collectedBy: auth('admin')->user()?->name ?? 'Admin',
+            adminId: auth('admin')->id()
+        );
+
+        AdminActivity::log(
+            'updated',
+            'Donation',
+            $donation->id,
+            "Recorded payment of ৳{$validated['amount']} for registration #{$donation->id}",
+            ['payment_id' => $payment->id, 'amount' => $validated['amount']]
+        );
+
+        $message = "Payment of ৳{$validated['amount']} recorded successfully.";
+        if ($donation->fresh()->payment_status === 'paid_in_full') {
+            $message .= " Registration is now fully paid.";
+        } else {
+            $remaining = $donation->fresh()->due_amount;
+            $message .= " Remaining due: ৳{$remaining}";
+        }
+
+        return back()->with('success', $message);
     }
 
     public function verify(Donation $donation)
@@ -176,6 +217,8 @@ class DonationController extends Controller
             'type' => ['required', 'in:participant,sponsor'],
             'donation_type' => ['required', 'in:iftar,jersey,both'],
             'amount' => ['required', 'numeric', 'min:0'],
+            'paid_amount' => ['nullable', 'numeric', 'min:0'],
+            'payment_type' => ['required', 'in:full_upfront,partial_upfront'],
             'collect_by' => ['required', 'string', 'max:255'],
             'sent_from' => ['nullable', 'string', 'max:20'],
             'sent_to_phone_id' => ['nullable', 'exists:phone_numbers,id'],
@@ -183,6 +226,20 @@ class DonationController extends Controller
             'status' => ['required', 'in:pending,verified'],
             'notes' => ['nullable', 'string'],
         ]);
+
+        // Calculate paid amount and payment status
+        $totalAmount = $validated['amount'];
+        $isPartial = $validated['payment_type'] === 'partial_upfront';
+        $paidAmount = $isPartial ? (float) ($validated['paid_amount'] ?? 0) : $totalAmount;
+        $dueAmount = $totalAmount - $paidAmount;
+
+        // Ensure paid amount doesn't exceed total
+        if ($paidAmount > $totalAmount) {
+            $paidAmount = $totalAmount;
+            $dueAmount = 0;
+        }
+
+        $paymentStatus = $paidAmount >= $totalAmount ? 'paid_in_full' : ($paidAmount > 0 ? 'partial_paid' : 'unpaid');
 
         // Set default values for optional fields
         if (empty($validated['sent_from'])) {
@@ -196,15 +253,43 @@ class DonationController extends Controller
             $validated['transaction_id'] = 'MANUAL-' . time();
         }
 
-        // Create the donation
-        $donation = Donation::create($validated);
+        // Create the donation with payment info
+        $donation = Donation::create([
+            'name' => $validated['name'],
+            'phone' => $validated['phone'],
+            'type' => $validated['type'],
+            'donation_type' => $validated['donation_type'],
+            'amount' => $totalAmount,
+            'paid_amount' => $paidAmount,
+            'due_amount' => $dueAmount,
+            'payment_status' => $paymentStatus,
+            'payment_type' => $validated['payment_type'],
+            'collect_by' => $validated['collect_by'],
+            'sent_from' => $validated['sent_from'],
+            'sent_to_phone_id' => $validated['sent_to_phone_id'],
+            'transaction_id' => $validated['transaction_id'],
+            'status' => $validated['status'],
+            'notes' => $validated['notes'] ?? null,
+        ]);
+
+        // Create payment history record
+        if ($paidAmount > 0) {
+            $donation->paymentHistories()->create([
+                'amount' => $paidAmount,
+                'payment_method' => 'other',
+                'transaction_id' => $validated['transaction_id'] ?? null,
+                'notes' => $isPartial ? 'Partial upfront payment (Manual)' : 'Full upfront payment (Manual)',
+                'collected_by' => $validated['collect_by'],
+                'admin_id' => auth('admin')->id(),
+            ]);
+        }
 
         AdminActivity::log(
             'created',
             'Donation',
             $donation->id,
             "Created manual registration for {$donation->name} ({$donation->donation_type_label})",
-            ['amount' => $donation->amount, 'type' => $validated['type'] ?? 'participant']
+            ['amount' => $donation->amount, 'paid_amount' => $paidAmount, 'type' => $validated['type'] ?? 'participant']
         );
 
         // Create jersey detail if applicable

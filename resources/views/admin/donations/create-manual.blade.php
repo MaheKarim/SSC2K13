@@ -106,6 +106,39 @@
                                 <p class="text-red-500 text-xs md:text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <div>
+                            <label for="payment_type" class="label text-xs md:text-sm">Payment Type <span
+                                    class="text-red-500">*</span></label>
+                            <select id="payment_type" name="payment_type" onchange="togglePartialPayment()"
+                                class="input-field text-sm @error('payment_type') border-red-500 @enderror" required>
+                                <option value="full_upfront" {{ old('payment_type') == 'full_upfront' ? 'selected' : '' }}>
+                                    Full Payment</option>
+                                <option value="partial_upfront"
+                                    {{ old('payment_type') == 'partial_upfront' ? 'selected' : '' }}>Partial Payment
+                                </option>
+                            </select>
+                            @error('payment_type')
+                                <p class="text-red-500 text-xs md:text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <!-- Partial Payment Field -->
+                    <div id="partialPaymentSection"
+                        class="hidden mt-3 md:mt-4 p-3 md:p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                        <label for="paid_amount" class="label text-xs md:text-sm text-amber-800">Paid Amount (৳) <span
+                                class="text-red-500">*</span></label>
+                        <div class="flex items-center gap-2">
+                            <input type="number" id="paid_amount" name="paid_amount" value="{{ old('paid_amount') }}"
+                                class="input-field text-sm @error('paid_amount') border-red-500 @enderror"
+                                placeholder="Enter paid amount" step="0.01" min="0">
+                        </div>
+                        <p class="text-xs text-amber-600 mt-1">Enter the amount that has been paid now. Remaining amount
+                            will be due.</p>
+                        @error('paid_amount')
+                            <p class="text-red-500 text-xs md:text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Jersey Details (Conditional) -->
@@ -288,9 +321,24 @@
             }
         }
 
+        function togglePartialPayment() {
+            const paymentType = document.getElementById('payment_type').value;
+            const partialSection = document.getElementById('partialPaymentSection');
+            const paidAmountField = document.getElementById('paid_amount');
+
+            if (paymentType === 'partial_upfront') {
+                partialSection.classList.remove('hidden');
+                paidAmountField.setAttribute('required', 'required');
+            } else {
+                partialSection.classList.add('hidden');
+                paidAmountField.removeAttribute('required');
+            }
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             updateAmount();
+            togglePartialPayment();
         });
     </script>
 @endsection
