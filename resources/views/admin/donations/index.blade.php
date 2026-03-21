@@ -20,7 +20,7 @@
         <!-- Filters and Export -->
         <div class="card p-3 md:p-6">
             <form action="{{ route('admin.registrations.index') }}" method="GET" class="flex flex-col gap-3 md:gap-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4">
                     <div class="sm:col-span-2 lg:col-span-1">
                         <label class="label text-xs md:text-sm">Search</label>
                         <input type="text" name="search" value="{{ request('search') }}" class="input-field text-sm"
@@ -42,6 +42,17 @@
                             <option value="pending" {{ request('status') === 'pending' ? 'selected' : '' }}>Pending</option>
                             <option value="verified" {{ request('status') === 'verified' ? 'selected' : '' }}>Verified
                             </option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="label text-xs md:text-sm">Sent To Number</label>
+                        <select name="phone_id" class="input-field text-sm">
+                            <option value="">All Numbers</option>
+                            @foreach ($phoneNumbers as $phone)
+                                <option value="{{ $phone->id }}" {{ request('phone_id') == $phone->id ? 'selected' : '' }}>
+                                    {{ $phone->number }} ({{ $phone->operator }})
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

@@ -23,6 +23,10 @@ class DonationController extends Controller
             $query->where('status', $request->status);
         }
 
+        if ($request->filled('phone_id')) {
+            $query->where('sent_to_phone_id', $request->phone_id);
+        }
+
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('name', 'like', "%{$request->search}%")
@@ -32,8 +36,9 @@ class DonationController extends Controller
         }
 
         $donations = $query->latest()->paginate(20);
+        $phoneNumbers = \App\Models\PhoneNumber::all();
 
-        return view('admin.donations.index', compact('donations'));
+        return view('admin.donations.index', compact('donations', 'phoneNumbers'));
     }
 
     public function show(Donation $donation)
