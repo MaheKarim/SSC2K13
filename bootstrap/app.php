@@ -16,5 +16,13 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->render(function (\Illuminate\Session\TokenMismatchException $e, \Illuminate\Http\Request $request) {
+            if (\Illuminate\Support\Facades\Auth::guard('admin')->check()) {
+                return redirect()->route('admin.dashboard');
+            }
+            
+            return redirect()->back()->withInput($request->except('_password', '_token'))->withErrors([
+                'email' => 'Your session has expired. Please try again.',
+            ]);
+        });
     })->create();
