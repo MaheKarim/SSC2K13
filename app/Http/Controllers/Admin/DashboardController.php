@@ -56,13 +56,17 @@ class DashboardController extends Controller
                 \Illuminate\Support\Facades\DB::raw('sum(case when type = "sponsor" then amount else 0 end) as sponsor_amount')
             )
             ->where('status', 'verified')
-            ->whereNotNull('sent_to_phone_id')
             ->groupBy('sent_to_phone_id')
             ->get()
             ->map(function ($stat) {
-                $phone = \App\Models\PhoneNumber::find($stat->sent_to_phone_id);
-                $stat->phone_number = $phone ? $phone->number : 'Unknown';
-                $stat->operator = $phone ? $phone->operator : 'Unknown';
+                if ($stat->sent_to_phone_id) {
+                    $phone = \App\Models\PhoneNumber::find($stat->sent_to_phone_id);
+                    $stat->phone_number = $phone ? $phone->number : 'Unknown';
+                    $stat->operator = $phone ? $phone->operator : 'Unknown';
+                } else {
+                    $stat->phone_number = 'Direct Collection';
+                    $stat->operator = 'No Phone';
+                }
                 return $stat;
             });
 
